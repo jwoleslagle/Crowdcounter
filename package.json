@@ -1,0 +1,13 @@
+{
+  "name": "crowdcounter",
+  "version": "1.0.0",
+  "description": "Crowd counting app using visual recognition",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "prod": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
