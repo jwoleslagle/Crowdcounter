@@ -3,6 +3,10 @@ const app = express();
 
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html');
+  });
+
 // both runServer and closeServer need to access the same
 // server object, so we declare `server` here, and then when
 // runServer runs, it assigns a value.
