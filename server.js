@@ -25,11 +25,21 @@ const app = express();
 // Logging
 app.use(morgan('common'));
 
-app.use(express.static('assets/views'));
+app.use(express.static('assets'));
 
 // Route to serve start page
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/assets/views/index.html');
+});
+
+// Route to serve login page
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/assets/views/login.html');
+});
+
+// Route to serve login page
+app.get('/signup', (req, res) => {
+  res.sendFile(__dirname + '/assets/views/signup.html');
 });
 
 // CORS
@@ -49,13 +59,16 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 
-const jwtAuth = passport.authenticate('jwt', { session: false });
+const jwtAuth = passport.authenticate('jwt', { session: false, failureRedirect: '/login' });
 
-// A protected endpoint which needs a valid JWT to access it
-app.get('/api/protected', jwtAuth, (req, res) => {
-  return res.json({
-    data: 'rosebud'
-  });
+// Protected route to serve event page
+app.get('/event', jwtAuth, (req, res) => {
+  res.sendFile(__dirname + '/assets/views/event.html');
+});
+
+// Protected route to serve results page
+app.get('/results', jwtAuth, (req, res) => {
+  res.sendFile(__dirname + '/assets/views/results.html');
 });
 
 app.use('*', (req, res) => {
@@ -68,7 +81,7 @@ let server;
 
 function runServer() {
   return new Promise((resolve, reject) => {
-    mongoose.connect(DATABASE_URL, { useMongoClient: true }, err => {
+    mongoose.connect(DATABASE_URL, err => {
       if (err) {
         return reject(err);
       }

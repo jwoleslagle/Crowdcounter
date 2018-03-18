@@ -15,21 +15,21 @@ const expect = chai.expect;
 // see: https://github.com/chaijs/chai-http
 chai.use(chaiHttp);
 
-describe('Protected endpoint', function() {
+describe('Protected endpoint', () => {
   const username = 'exampleUser';
   const password = 'examplePass';
   const firstName = 'Example';
   const lastName = 'User';
 
-  before(function() {
+  before(() => {
     return runServer();
   });
 
-  after(function() {
+  after(() => {
     return closeServer();
   });
 
-  beforeEach(function() {
+  beforeEach(() => {
     return User.hashPassword(password).then(password =>
       User.create({
         username,
@@ -40,29 +40,28 @@ describe('Protected endpoint', function() {
     );
   });
 
-  afterEach(function() {
+  afterEach(() => {
     return User.remove({});
   });
 
-  describe('/api/protected', function() {
-    it('Should reject requests with no credentials', function() {
+  describe('/results', () => {
+    it('Should redirect requests with no credentials to login', () => {
       return chai
         .request(app)
-        .get('/api/protected')
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .get('/results').redirects(0)
+        .then(() => {
+          expect(res).to.have.status(302); 
+          expect(res).to.have.header('location', '/login'); 
+        })
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
-          expect(res).to.have.status(401);
         });
     });
 
-    it('Should reject requests with an invalid token', function() {
+    it('Should redirect requests with an invalid token to login', () => {
       const token = jwt.sign(
         {
           username,
@@ -75,24 +74,23 @@ describe('Protected endpoint', function() {
           expiresIn: '7d'
         }
       );
-
       return chai
         .request(app)
-        .get('/api/protected')
+        .get('/results').redirects(0)
         .set('Authorization', `Bearer ${token}`)
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .then(() => {
+          expect(res).to.have.status(302); 
+          expect(res).to.have.header('location', '/login'); 
+        })
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
-          expect(res).to.have.status(401);
         });
     });
-    it('Should reject requests with an expired token', function() {
+
+    it('Should redirect requests with an expired token to login', () => {
       const token = jwt.sign(
         {
           user: {
@@ -108,24 +106,24 @@ describe('Protected endpoint', function() {
           subject: username
         }
       );
-
       return chai
         .request(app)
-        .get('/api/protected')
+        .get('/results').redirects(0)
         .set('authorization', `Bearer ${token}`)
-        .then(() =>
-          expect.fail(null, null, 'Request should not succeed')
-        )
+        .then(() => {
+          expect(res).to.have.status(302); 
+          expect(res).to.have.header('location', '/login'); 
+        })
         .catch(err => {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
 
           const res = err.response;
-          expect(res).to.have.status(401);
         });
     });
-    it('Should send protected data', function() {
+
+    it('Should send protected data', () => {
       const token = jwt.sign(
         {
           user: {
@@ -144,12 +142,37 @@ describe('Protected endpoint', function() {
 
       return chai
         .request(app)
-        .get('/api/protected')
+        .get('/results')
         .set('authorization', `Bearer ${token}`)
         .then(res => {
           expect(res).to.have.status(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.data).to.equal('rosebud');
+          expect(res).to.be.html;
+        });
+    });
+
+    
+    it('Should expose username to page', () => {
+      const token = jwt.sign(
+        {
+          user: {
+            username,
+            firstName,
+            lastName
+          }
+        },
+        JWT_SECRET,
+        {
+          algorithm: 'HS256',
+          subject: username,
+          expiresIn: '7d'
+        }
+      );
+      return chai
+        .request(app)
+        .get('/event')
+        .set('authorization', `Bearer ${token}`)
+        .then(res => {
+          expect(username).to.equal('exampleUser');
         });
     });
   });

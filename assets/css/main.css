@@ -1,0 +1,90 @@
+html {
+    background-color: #3f94e7;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  header {
+    text-align: center;
+  }
+  
+  .en-logo {
+    width: 350px;
+    margin: 5px;
+  }
+  
+  .form-area {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .signup-container {
+    background-color: white;
+    text-align: center;
+    width: 400px;
+    border: 2px royalblue solid;
+  }
+  
+  .signup-container h1 {
+    text-align: center;
+    font-size: 2em;
+  }
+  
+  fieldset {
+    border: none;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  .input-field {
+    width: 286px;
+    padding: 15px;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    background-color: ghostwhite;
+    color: gray;
+  }
+  
+  label {
+    display: block;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  
+  input::placeholder {
+    color: gray;
+  }
+  
+  button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    height: 55px;
+    width: 320px;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: mediumseagreen;
+    border: 2px solid seagreen;
+    border-radius: 3px;
+  }
+  
+  .signup-button:hover {
+    background-color: seagreen;
+  }
+  
+  .login-notice {
+    color: white;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .login-notice a {
+    color: white;
+    font-weight: bold;
+  }

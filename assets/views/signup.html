@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta description="Login page for Crowdcounter app">
-    <title>Crowdcounter - Login Page</title>
+    <meta description="Signup page for Crowdcounter app">
+    <title>Crowdcounter - Signup Page</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <!-- Linking Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -15,20 +15,24 @@
     </header>
     <main role="main">
       <section class="form-area" role="region">
-        <div class="login-container">
+        <div class="signup-container">
           <h1>Sign up</h1>
-          <form action="/login" method="post">
+          <form action="/signup" method="post">
             <fieldset>
               <label for="email" class="form-label">Email</label>
               <input type="email" id="email" placeholder="foo@bar.com" name="email" class="input-field" />
               <label for="password">Password</label>
               <input type="text" id="password" placeholder="1234passw0rd" name="password" class="input-field" />
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" id="firstName" placeholder="Jonathan" name="firstName" class="input-field" />
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" placeholder="Doeregard" name="lastName" class="input-field" />
             </fieldset>
-            <button class="login-button" action="submit">Log In</button>
+            <button class="signup-button" action="submit">Sign up</button>
           </form>
         </div>
       </section>
-      <div class="signup-notice">Don't have an account? <a href="/signup">Sign up</a></div>
+      <div class="login-notice">Already have an account? <a href="/login">Log in</a></div>
     </main>
   </body>
 </html>
