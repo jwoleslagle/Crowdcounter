@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <meta description="Signup page for Crowdcounter app">
     <title>Crowdcounter - Signup Page</title>
-    <link href="css/main.css" rel="stylesheet" type="text/css" />
-    <!-- Linking Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--Stylesheets and Fonts-->
+      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <!-- Linking Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--Scripts-->
+      <!-- Include JQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <!-- Include JS specific to page -->
+    <script src="js/signup.js"></script>
   </head>
   <body>
     <header role="banner">
@@ -17,18 +23,21 @@
       <section class="form-area" role="region">
         <div class="signup-container">
           <h1>Sign up</h1>
-          <form action="/signup" method="post">
+          <div class="alert-container js-alert-container">
+            <div class="alert-area js-alert-area"></div>
+          </div>
+          <form>
             <fieldset>
               <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" placeholder="foo@bar.com" name="email" class="input-field" />
+              <input type="email" id="email" placeholder="foo@bar.com" name="email" class="input-field js-uname-entry" />
               <label for="password">Password</label>
-              <input type="text" id="password" placeholder="1234passw0rd" name="password" class="input-field" />
+              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" />
               <label for="firstName" class="form-label">First Name</label>
-              <input type="text" id="firstName" placeholder="Jonathan" name="firstName" class="input-field" />
+              <input type="text" id="firstName" placeholder="Jonathan" name="firstName" class="input-field js-fname-entry" />
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" placeholder="Doeregard" name="lastName" class="input-field" />
+              <input type="text" id="lastName" placeholder="Doeregard" name="lastName" class="input-field js-lname-entry" />
             </fieldset>
-            <button class="signup-button" action="submit">Sign up</button>
+            <button class="js-signup-button" type="button">Sign up</button>
           </form>
         </div>
       </section>

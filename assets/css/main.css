@@ -7,6 +7,15 @@ html {
     text-align: center;
   }
   
+  .alert-area {
+    color: darkred;
+    background-color: rgba(230, 0, 0, 0.1);
+  }
+
+  .alert-container {
+    text-align: center;
+  }
+
   .en-logo {
     width: 350px;
     margin: 5px;
@@ -25,6 +34,18 @@ html {
   }
   
   .signup-container h1 {
+    text-align: center;
+    font-size: 2em;
+  }
+
+  .login-container {
+    background-color: white;
+    text-align: center;
+    width: 400px;
+    border: 2px royalblue solid;
+  }
+
+  .login-container h1 {
     text-align: center;
     font-size: 2em;
   }
@@ -75,6 +96,10 @@ html {
   .signup-button:hover {
     background-color: seagreen;
   }
+
+  .login-button:hover {
+    background-color: seagreen;
+  }
   
   .login-notice {
     color: white;
@@ -85,6 +110,19 @@ html {
   }
   
   .login-notice a {
+    color: white;
+    font-weight: bold;
+  }
+
+  .signup-notice {
+    color: white;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .signup-notice a {
     color: white;
     font-weight: bold;
   }
