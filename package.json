@@ -2,7 +2,7 @@
   "name": "crowdcounter",
   "version": "1.0.0",
   "description": "Crowd counting app using visual recognition",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha --exit",
     "start": "nodemon server.js"

@@ -9,7 +9,7 @@ const router = express.Router();
 const jsonParser = bodyParser.json();
 
 // Post to register a new user
-router.post('/', jsonParser, (req, res) => {
+router.post('/', jsonParser, function(req, res) {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 

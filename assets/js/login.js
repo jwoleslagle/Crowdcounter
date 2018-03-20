@@ -24,16 +24,26 @@ function handleLoginSubmit() {
 				username: uname,
 				password: pword
 			};
-			$.post("/api/auth/login", JSON.stringify(loginParams), (response) => {
-				if (response.authToken) {
-					Storage.setItem("TOKEN", response.authToken);
-					console.log(response.authToken);
-					window.location.replace('/event');
-				} else {
-					clearInputs();
-					const alertInvalid = 'Please enter a valid username and/or password.';
-					alertUser(alertInvalid);
-				}
+			$.ajax({
+				contentType: 'application/json',
+				data: JSON.stringify(loginParams),
+				dataType: 'json',
+				success: function(response){
+					if (response.authToken) {
+						Storage.setItem("TOKEN", response.authToken);
+						window.location.replace('/event');
+					} else {
+						clearInputs();
+						const alertInvalid = 'Please enter a valid username and/or password.';
+						alertUser(alertInvalid);
+					}
+				},
+				error: function(){
+					const alertError = 'Error encountered in POST.';
+					alertUser(alertError);
+				},
+				type: 'POST',
+				url: '/api/auth/login'
 			});
 		} else {
 			const alertBlank = 'Please enter a username and / or password.';

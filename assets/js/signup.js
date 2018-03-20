@@ -30,51 +30,34 @@ function handleSignupClick() {
 				firstName: fname,
 				lastName: lname
 			};
-			// $.ajax({
-			// 	type: "POST",
-			// 	url: "/api/users",
-			// 	data: JSON.stringify(signupParams),
-			// })
-			// 	.done ((data) => {
-			// 		if (data.username) {
-			// 			alertSuccess = `Welcome ${data.username}! Please log in.`
-			// 			window.location.replace('/login');
-			// 			alertUser(alertSuccess);
-			// 		} else {
-			// 			clearInputs();
-			// 			const alertInvalid = 'Please enter a valid username and/or password.';
-			// 			alertUser(alertInvalid);
-			// 		}
-			// 	});
-			$.post("/api/users", JSON.stringify(signupParams), function(data) {			
-				if (data.username) {
-					alertSuccess = `Welcome ${data.username}! Please log in.`
-					window.location.replace('/login');
-					alertUser(alertSuccess);
-				} else {
-					clearInputs();
-					const alertInvalid = 'Please enter a valid username and/or password.';
-					alertUser(alertInvalid);
-				}
-			}, "json");
+			$.ajax({
+				contentType: 'application/json',
+				data: JSON.stringify(signupParams),
+				dataType: 'json',
+				success: function(data){
+					if (data.username) {
+						const alertSuccess = `Welcome ${data.username}! Please log in.`;
+						window.location.replace('/login');
+						alertUser(alertSuccess);
+					} else {
+						clearInputs();
+						const alertInvalid = 'Please enter a valid username and/or password.';
+						alertUser(alertInvalid);
+					}
+				},
+				error: function(){
+					const alertError = 'Error encountered in POST.';
+					alertUser(alertError);
+				},
+				type: 'POST',
+				url: '/api/users'
+			});
 		} else {
 			const alertBlank = 'Please enter a username and / or password.';
 			alertUser(alertBlank);
 		}
 	});
 }
-
-// function postCallback(data) {			
-// 	if (data.username) {
-// 		alertSuccess = `Welcome ${data.username}! Please log in.`
-// 		window.location.replace('/login');
-// 		alertUser(alertSuccess);
-// 	} else {
-// 		clearInputs();
-// 		const alertInvalid = 'Please enter a valid username and/or password.';
-// 		alertUser(alertInvalid);
-// 	}
-// };
 
 //Document ready callback function - powers the page.
 function renderSignupPage() {
