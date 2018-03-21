@@ -15,6 +15,7 @@ const passport = require('passport');
 // console.log(bobby); // De Niro - the variable name is bobby, not robert
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { router: eventsRouter } = require('./events');
 
 mongoose.Promise = global.Promise;
 
@@ -58,12 +59,14 @@ passport.use(jwtStrategy);
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
+app.use('/api/events/', eventsRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false, failureRedirect: '/login' });
 
 // Protected route to serve event page
-app.get('/event', jwtAuth, (req, res) => {
-  res.sendFile(__dirname + '/assets/views/event.html');
+// TODO: Restore 'jwtAuth,' middleware to protect page
+app.get('/events', (req, res) => {
+  res.sendFile(__dirname + '/assets/views/events.html');
 });
 
 // Protected route to serve results page
