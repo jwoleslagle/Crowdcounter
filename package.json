@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --exit",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "debug": "nodemon --inspect server.js"
   },
   "author": "Jeff Woleslagle",
   "license": "ISC",

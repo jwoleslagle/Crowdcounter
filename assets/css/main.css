@@ -25,27 +25,15 @@ html {
     display: flex;
     justify-content: center;
   }
-  
-  .signup-container {
-    background-color: white;
-    text-align: center;
-    width: 400px;
-    border: 2px royalblue solid;
-  }
-  
-  .signup-container h1 {
-    text-align: center;
-    font-size: 2em;
-  }
 
-  .login-container {
+  .main-container {
     background-color: white;
     text-align: center;
     width: 400px;
     border: 2px royalblue solid;
   }
 
-  .login-container h1 {
+  .main-container h1 {
     text-align: center;
     font-size: 2em;
   }
@@ -93,15 +81,11 @@ html {
     border-radius: 3px;
   }
   
-  .signup-button:hover {
-    background-color: seagreen;
-  }
-
-  .login-button:hover {
+  .submit-button:hover {
     background-color: seagreen;
   }
   
-  .login-notice {
+  .main-bottom-notice {
     color: white;
     font-weight: bold;
     display: block;
@@ -109,20 +93,7 @@ html {
     margin-top: 15px;
   }
   
-  .login-notice a {
-    color: white;
-    font-weight: bold;
-  }
-
-  .signup-notice {
-    color: white;
-    font-weight: bold;
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .signup-notice a {
+  .main-bottom-notice a {
     color: white;
     font-weight: bold;
   }
