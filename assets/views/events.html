@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.211.0.min.js"></script>
-    <script src="js/events.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta description="Login page for Crowdcounter app">
+    <title>Crowdcounter - Login Page</title>
+    <!--Stylesheets and Fonts-->
+      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <!-- Linking Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--Scripts-->
+      <!-- Include AW3 SDK -->
+      <script src="https://sdk.amazonaws.com/js/aws-sdk-2.211.0.min.js"></script>
+      <!-- Include JQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <!-- Include JS specific to page -->
+      <script src="js/events.js"></script>
   </head>
   <body>
-    <h1>My Events</h1>
-    <div id="app"></div>
+    
+    <header role="banner">
+      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
+    </header>
+
+    <main role="main">
+      <section class="form-area" role="region">
+        <div class="main-container">
+          <h3>Create a New Event</h3>
+            <form ref='uploadForm' 
+                  id='uploadForm' 
+                  action='api/events/upload' 
+                  method='post' 
+                  encType="multipart/form-data">
+              <input type="file" name="sampleFile" />
+              <input type='submit' value='Upload!' />
+            </form>
+            <br />
+            <hr />
+          <h3>Past Events</h3>
+            <div id="app"></div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
