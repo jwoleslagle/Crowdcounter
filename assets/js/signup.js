@@ -37,7 +37,7 @@ function handleSignupClick() {
 				success: function(data){
 					if (data.username) {
 						const alertSuccess = `Welcome ${data.username}! Please log in.`;
-						window.location.replace('/login');
+						window.location.replace('/login?welcome');
 						alertUser(alertSuccess);
 					} else {
 						clearInputs();

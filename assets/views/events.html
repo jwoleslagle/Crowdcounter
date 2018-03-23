@@ -32,13 +32,13 @@
                   action='api/events/upload' 
                   method='post' 
                   encType="multipart/form-data">
-              <input type="file" name="sampleFile" />
-              <input type='submit' value='Upload!' />
+              <input type="file" name="uploadFile" accept=".jpg, .jpeg, .png" />
+              <input type='submit' value='Upload' />
             </form>
             <br />
             <hr />
           <h3>Past Events</h3>
-            <div id="app"></div>
+            <div class="eventsList"></div>
         </div>
       </section>
     </main>

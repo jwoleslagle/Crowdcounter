@@ -1,10 +1,41 @@
-html {
+  html {
     background-color: #3f94e7;
     font-family: 'Roboto', sans-serif;
+  }
+
+    
+  button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    height: 55px;
+    width: 320px;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: mediumseagreen;
+    border: 2px solid seagreen;
+    border-radius: 3px;
+  }
+
+  fieldset {
+    border: none;
+    text-align: center;
+    padding-left: 40px;
+    padding-right: 40px;
   }
   
   header {
     text-align: center;
+  }
+ 
+  label {
+    display: block;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   
   .alert-area {
@@ -19,6 +50,11 @@ html {
   .en-logo {
     width: 350px;
     margin: 5px;
+  }
+
+  .events-list {
+    list-style-type: none;
+    padding: 0;
   }
   
   .form-area {
@@ -38,13 +74,6 @@ html {
     font-size: 2em;
   }
   
-  fieldset {
-    border: none;
-    text-align: center;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-  
   .input-field {
     width: 286px;
     padding: 15px;
@@ -54,35 +83,8 @@ html {
     color: gray;
   }
   
-  label {
-    display: block;
-    text-align: left;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  
   input::placeholder {
     color: gray;
-  }
-  
-  button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    height: 55px;
-    width: 320px;
-    margin-bottom: 50px;
-    color: white;
-    font-size: 1.3em;
-    font-weight: bold;
-    background-color: mediumseagreen;
-    border: 2px solid seagreen;
-    border-radius: 3px;
-  }
-  
-  .submit-button:hover {
-    background-color: seagreen;
   }
   
   .main-bottom-notice {
@@ -97,3 +99,8 @@ html {
     color: white;
     font-weight: bold;
   }
+
+  .submit-button:hover {
+    background-color: seagreen;
+  }
+  

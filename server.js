@@ -17,6 +17,8 @@ const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const { router: eventsRouter } = require('./events');
 
+const fileUpload = require('express-fileupload');
+
 mongoose.Promise = global.Promise;
 
 const { PORT, DATABASE_URL } = require('./config');
@@ -25,6 +27,8 @@ const app = express();
 
 // Logging
 app.use(morgan('common'));
+
+app.use(fileUpload());
 
 app.use(express.static('assets'));
 
