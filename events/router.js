@@ -5,7 +5,7 @@ const   express = require('express'),
         jsonParser = bodyParser.json(),
         config = require('../config'),
 
-        fileUpload = require('express-fileUpload'),
+        fileUpload = require('express-fileupload'),
         fs = require('fs'),
         path = require('path'),
 
