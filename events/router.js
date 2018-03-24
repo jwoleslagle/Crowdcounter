@@ -5,12 +5,9 @@ const   express = require('express'),
         jsonParser = bodyParser.json(),
         config = require('../config'),
 
+        fileUpload = require('express-fileUpload'),
         fs = require('fs'),
         path = require('path'),
-        fileUpload = require('express-fileupload'),
-        formidable = require('formidable'),
-        multer = require('multer'),
-        multerS3 = require('multer-s3'),
 
         bucketName = config.BUCKET_NAME,
         bucketRegion = config.REGION,
@@ -30,19 +27,6 @@ AWS.config.update({
     })
   });
 
-let upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: bucketName,
-        metadata: function (req, file, cb) {
-            cb(null, {fieldName: file.fieldname});
-        },
-        key: function (req, file, cb) {
-            cb(null, Date.now().toString())
-        }
-    })
-})
-
 // Get to return all event files in S3 folder.
 router.get('/', (req, res) => {
     // TODO: change 'test2' to req.username
@@ -50,8 +34,7 @@ router.get('/', (req, res) => {
     // Create the parameters for calling createBucket
     const bucketParams = { 
         Bucket: bucketName,
-        Prefix: bucketPrefix 
-      };                                
+        Prefix: bucketPrefix };                                
     // Call S3 to list items in the bucket
     s3.listObjects(bucketParams, function(err, data) {
         if (err) {
@@ -65,30 +48,44 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/upload', upload.array('req.files', 1), function(req, res, next) {
-    res.send('Successfully uploaded ' + req.files.length + ' files!')
-  })
+router.post('/event/create', (req, res) => {
+    // call S3 to retrieve upload file to specified bucket
+    const uploadParams = {Bucket: bucketName, Key: '', Body: ''};
+    const file = req.files.uploadFile;
+    const keyPath = 'user/' + req.body.ulUsername + '/';
+    uploadParams.Body = file.data;
+    uploadParams.Key = keyPath + file.name;
 
-// router.post('/upload', (req, res) => {
-//     // call S3 to retrieve upload file to specified bucket
-//     const uploadParams = {Bucket: bucketName, Key: '', Body: ''};
-//     const file = req.files.uploadFile;
+    // call S3 to retrieve upload file to specified bucket
+    s3.upload (uploadParams, function (err, data) {
+        if (err) {
+            res.status(500).json({message: 'Internal server error: ' + err});
+        } if (data) {
+            res.status(201).json({  message:        'Upload successful',
+                                    dataLocation:   data.Location,
+                                    dataETag:       data.ETag});
+        }
+    });
+});
 
-//     let fileStream = fs.createReadStream(path.basename(file.name));
-//     fileStream.on('error', function(err) {
-//         console.log('File Error', err);
-//         });
-//     uploadParams.Body = fileStream;
-//     uploadParams.Key = path.basename(file);
+router.delete('/event/delete', (req, res) => {
+    // call S3 to retrieve upload file to specified bucket
+    const deleteParams = {Bucket: bucketName, Key: ''};
+    const file = req.files.uploadFile;
+    //TODO: Fix this to pull actual path for username.
+    const bucketKeyPath = 'user/test2/';
 
-//     // call S3 to retrieve upload file to specified bucket
-//     s3.upload (uploadParams, function (err, data) {
-//     if (err) {
-//         res.status(500).json({message: 'Internal server error: ' + err});
-//     } if (data) {
-//         res.status(201).json({message: 'Upload successful: ' + data.Location});
-//     }
-//     });
-// });
+    deleteParams.Key = bucketKeyPath + file.name;
+
+    // call S3 to retrieve upload file to specified bucket
+    s3.deleteObject(deleteParams, function (err, data) {
+        if (err) {
+            res.status(500).json({message: 'Internal server error: ' + err});
+        } if (data) {
+            res.status(204).json({  message: 'Delete successful'});
+        }
+    });
+});
+
 
 module.exports = {router};

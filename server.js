@@ -73,9 +73,16 @@ app.get('/events', (req, res) => {
   res.sendFile(__dirname + '/assets/views/events.html');
 });
 
-// Protected route to serve results page
-app.get('/results', jwtAuth, (req, res) => {
-  res.sendFile(__dirname + '/assets/views/results.html');
+// Protected route to serve event delete page
+// TODO: Restore 'jwtAuth,' middleware to protect page
+app.get('/event-delete', (req, res) => {
+  res.sendFile(__dirname + '/assets/views/delete.html');
+});
+
+// Protected route to serve event delete page
+// TODO: Restore 'jwtAuth,' middleware to protect page
+app.get('/event-details', (req, res) => {
+  res.sendFile(__dirname + '/assets/views/details.html');
 });
 
 app.use('*', (req, res) => {

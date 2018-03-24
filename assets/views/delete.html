@@ -15,7 +15,7 @@
       <!-- Include JQuery -->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
-      <script src="js/events.js"></script>
+      <script src="js/delete.js"></script>
   </head>
   <body>
     
@@ -26,17 +26,13 @@
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
-          <h3>Create a New Event</h3>
-            <form id='uploadForm' action='api/events/event/create' method='post' 
-                  encType="multipart/form-data">
-              <input type="file" name="uploadFile" accept=".jpg, .jpeg, .png" />
-              <input type="hidden" name="ulUsername" />
-              <input type='submit' value='Upload' />
+          <h3>Delete this event?</h3>
+          <div class="pastEvent"></div>
+            <form id='deleteForm' action='api/events/event/delete' method='delete'>
+              <input type="hidden" name="deleteKey" value="" />
+              <input type='submit' value='Delete it (for sure - no takebacks!)' />
             </form>
             <br />
-            <hr />
-          <h3>Past Events</h3>
-            <div class="eventsList"></div>
         </div>
       </section>
     </main>

@@ -4,15 +4,24 @@
 
 function displayResults(rawResult) {
     let htmlResult= '<ul class="events-list">';
-    let test = rawResult[0].Key;
     rawResult.forEach((obj) => {
-        htmlResult += `<li>
-        <h4 class="past-event-header">Event Name</h4>
+        htmlResult += `<li><h4 class="past-event-header">Event Name</h4>
         <img class="past-event-img"src="https://s3-us-east-2.amazonaws.com/crowdcounter/${obj.Key}" />
-        <p class="past-event-date">Tuesday, March 22, 2018</p></li>`;
+        <p class="past-event-date">Tuesday, March 22, 2018</p>
+        <div class="past-event-delete"><a href="/events-delete?evnt=${encodeURI(obj.Key)}" alt="Delete this event">Delete</a></div></li>`;
     });
     htmlResult += '</ul>';
     return htmlResult;
+}
+
+function getUsername() {
+    //TODO: page should pull username from jwt
+    return 'test2';
+}
+
+function setUploadUsername(username) {
+    $('input[name="ulUsername"]').val(username);
+    console.log($('input[name="ulUsername"]').val());
 }
 
 function showPastEvents(user) {
@@ -42,9 +51,9 @@ function showPastEvents(user) {
 
 //callback function to render page
 function startPage() {
-    //TODO: remove const user= - page should pull username from jwt
-    const user = 'test2';
+    const user = getUsername();
     showPastEvents(user);
+    setTimeout(() => { setUploadUsername(user); }, 0);
 }
 
 console.log('Events page loaded.');
