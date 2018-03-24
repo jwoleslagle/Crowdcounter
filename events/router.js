@@ -48,6 +48,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// POST to upload an event image.
 router.post('/', (req, res) => {
     // call S3 to retrieve upload file to specified bucket
     const uploadParams = {Bucket: bucketName, Key: '', Body: ''};
@@ -61,13 +62,13 @@ router.post('/', (req, res) => {
         if (err) {
             res.status(500).json({message: 'Internal server error: ' + err});
         } if (data) {
-            res.status(201).json({  message:        'Upload successful',
-                                    dataLocation:   data.Location,
-                                    dataETag:       data.ETag});
+            const target = `/details?evnt=${encodeURI(data.Key)}`;
+            res.status(201).redirect(target);
         }
     });
 });
 
+//This is actually a DELETE method but was prevented as such by browser - TODO: Research / implement 'method override"
 router.post('/remove', (req, res) => {
     // call S3 to retrieve upload file to specified bucket
     const deleteParams = {Bucket: bucketName, Key: ''};
@@ -79,7 +80,7 @@ router.post('/remove', (req, res) => {
         if (err) {
             res.status(500).json({message: 'Internal server error: ' + err});
         } if (data) {
-            res.status(204).json({  message: 'Delete successful'});
+            res.status(301).redirect('/events?=deleteSuccess');
         }
     });
 });

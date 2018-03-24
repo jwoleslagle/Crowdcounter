@@ -31,7 +31,7 @@ function handleLoginSubmit() {
 				success: function(response){
 					if (response.authToken) {
 						Storage.setItem("TOKEN", response.authToken);
-						window.location.replace('/event');
+						window.location.replace('/events?=welcome');
 					} else {
 						clearInputs();
 						const alertInvalid = 'Please enter a valid username and/or password.';

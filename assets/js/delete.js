@@ -8,8 +8,6 @@ function renderEventHeader(eventKey) {
     return htmlResult;
 }
 
-
-
 function getKeyFromQstring() {
     const rawQuerystring = location.search;
     const key = decodeURI(rawQuerystring.slice(6));
@@ -21,9 +19,36 @@ function setDeleteKey(key) {
     console.log($('input[name="deleteKey"]').val());
 }
 
+function watchDeleteSubmit (delKey) {
+    $('#deleteForm').submit(function (e) {
+        e.preventDefault();//prevent the default action
+
+        $.ajax({
+            contentType: 'application/json',
+            headers: {
+                //TODO: Uncomment Authorization line
+                //Authorization: "JWT" + localStorage.getItem("TOKEN"),
+            },
+            success: (result) => {
+                if (!result) {
+                    const alertNoData = 'No events found.';
+                    $('div.eventsList').html(alertNoData);
+                }
+            },
+            error: (err) => {
+                const alertError = 'Error encountered when retrieving events: ' + err;
+                $('div.eventsList').html(alertError);
+            },
+            type: 'POST',
+            url: '/api/events/remove'
+        });
+    });
+}
+
 //callback function to render page
 function startPage() {
     const deleteKey = getKeyFromQstring();
+    watchDeleteSubmit(deleteKey);
     setTimeout(() => {  
         $('div.pastEvent').html(renderEventHeader(deleteKey)); 
         setDeleteKey(deleteKey);

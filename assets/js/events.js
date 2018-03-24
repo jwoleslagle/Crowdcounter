@@ -3,12 +3,17 @@
 //TODO: Secure bucket to prevent anonymous read-only access
 
 function displayResults(rawResult) {
+    let encodedPath = '';
     let htmlResult= '<ul class="events-list">';
     rawResult.forEach((obj) => {
-        htmlResult += `<li><h4 class="past-event-header">Event Name</h4>
+        encodedPath = encodeURI(obj.Key);
+        htmlResult += `<li class="event">
+        <h4 class="past-event-header">Event Name</h4>
         <img class="past-event-img"src="https://s3-us-east-2.amazonaws.com/crowdcounter/${obj.Key}" />
         <p class="past-event-date">Tuesday, March 22, 2018</p>
-        <div class="past-event-delete"><a href="/delete?evnt=${encodeURI(obj.Key)}" alt="Delete this event">Delete</a></div></li>`;
+        <div class="links">
+            <a class="event-details-link" href="/details?evnt=${encodedPath}">Event Details</a> | <a class="delete-link" href="/delete?evnt=${encodedPath}" alt="Delete this event">Delete</div>
+        </a><br /><hr /></li>`;
     });
     htmlResult += '</ul>';
     return htmlResult;
