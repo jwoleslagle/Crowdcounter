@@ -8,7 +8,10 @@ function renderEventHeader(eventKey) {
     return htmlResult;
 }
 
-
+function renderLinks(eventKey) {
+    let htmlResult= `<div class="links"><a href="/events">Return to events list</a> | <a class="delete-link" href="/delete?evnt=${encodeURI(eventKey)}">Delete this event</a>`;
+    return htmlResult;
+}
 
 function getKeyFromQstring() {
     const rawQuerystring = location.search;
@@ -16,19 +19,14 @@ function getKeyFromQstring() {
     return key;
 }
 
-function setDeleteKey(key) {
-    $('input[name="deleteKey"]').val(key);
-    console.log($('input[name="deleteKey"]').val());
-}
-
 //callback function to render page
 function startPage() {
-    const deleteKey = getKeyFromQstring();
+    const eventKey = getKeyFromQstring();
     setTimeout(() => {  
-        $('div.pastEvent').html(renderEventHeader(deleteKey)); 
-        setDeleteKey(deleteKey);
+        $('div.eventHeader').html(renderEventHeader(eventKey)); 
+        $('div.links').html(renderLinks(eventKey));
     }, 0);
 }
 
-console.log('Delete page loaded.');
+console.log('Details page loaded.');
 $(startPage());

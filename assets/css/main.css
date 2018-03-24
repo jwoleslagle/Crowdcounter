@@ -47,6 +47,10 @@
     text-align: center;
   }
 
+  .delete-link {
+    color: red;
+  }
+
   .en-logo {
     width: 350px;
     margin: 5px;

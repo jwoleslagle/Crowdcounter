@@ -28,9 +28,9 @@
         <div class="main-container">
           <h3>Delete this event?</h3>
           <div class="pastEvent"></div>
-            <form id='deleteForm' action='api/events/event/delete' method='delete'>
-              <input type="hidden" name="deleteKey" value="" />
-              <input type='submit' value='Delete it (for sure - no takebacks!)' />
+            <form id="deleteForm" action="api/events/remove" encType="multipart/form-data" method="post">
+              <input type="hidden" name="deleteKey" />
+              <input type="submit" value="Delete it (for sure - no takebacks!)" />
             </form>
             <br />
         </div>

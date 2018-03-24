@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/event/create', (req, res) => {
+router.post('/', (req, res) => {
     // call S3 to retrieve upload file to specified bucket
     const uploadParams = {Bucket: bucketName, Key: '', Body: ''};
     const file = req.files.uploadFile;
@@ -68,14 +68,11 @@ router.post('/event/create', (req, res) => {
     });
 });
 
-router.delete('/event/delete', (req, res) => {
+router.post('/remove', (req, res) => {
     // call S3 to retrieve upload file to specified bucket
     const deleteParams = {Bucket: bucketName, Key: ''};
-    const file = req.files.uploadFile;
-    //TODO: Fix this to pull actual path for username.
-    const bucketKeyPath = 'user/test2/';
-
-    deleteParams.Key = bucketKeyPath + file.name;
+    const decodedKey = (req.body.deleteKey);
+    deleteParams.Key = decodedKey;
 
     // call S3 to retrieve upload file to specified bucket
     s3.deleteObject(deleteParams, function (err, data) {

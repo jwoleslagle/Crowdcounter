@@ -8,7 +8,7 @@ function displayResults(rawResult) {
         htmlResult += `<li><h4 class="past-event-header">Event Name</h4>
         <img class="past-event-img"src="https://s3-us-east-2.amazonaws.com/crowdcounter/${obj.Key}" />
         <p class="past-event-date">Tuesday, March 22, 2018</p>
-        <div class="past-event-delete"><a href="/events-delete?evnt=${encodeURI(obj.Key)}" alt="Delete this event">Delete</a></div></li>`;
+        <div class="past-event-delete"><a href="/delete?evnt=${encodeURI(obj.Key)}" alt="Delete this event">Delete</a></div></li>`;
     });
     htmlResult += '</ul>';
     return htmlResult;

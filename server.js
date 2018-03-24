@@ -75,13 +75,13 @@ app.get('/events', (req, res) => {
 
 // Protected route to serve event delete page
 // TODO: Restore 'jwtAuth,' middleware to protect page
-app.get('/event-delete', (req, res) => {
+app.get('/delete', (req, res) => {
   res.sendFile(__dirname + '/assets/views/delete.html');
 });
 
 // Protected route to serve event delete page
 // TODO: Restore 'jwtAuth,' middleware to protect page
-app.get('/event-details', (req, res) => {
+app.get('/details', (req, res) => {
   res.sendFile(__dirname + '/assets/views/details.html');
 });
 
