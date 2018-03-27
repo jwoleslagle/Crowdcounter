@@ -16,6 +16,8 @@ const   express = require('express'),
         IdentityPoolId = config.IDENTITY_POOL_ID,
         buildDir = config.BUILD_DIR;
 
+const {Event} = require('./models');
+
 // Load the Node performance timing API for timing image processing.
 const { performance } = require('perf_hooks');
 
@@ -254,6 +256,32 @@ router.post('/', function (req, res) {
         //res.status(500).json({message: 'Internal server error: ' + err});
     });
 });
+
+async function s3uploader(s3PathToFile, base64data, metadata) {
+    const uploadParams = {  Bucket: bucketName, 
+                            Key: s3PathToFile, 
+                            Body: base64data, 
+                            Metadata: metadata   };
+    const s3ObjData = await s3.upload(uploadParams).promise();
+    return s3ObjData;
+}
+
+// POST to upload image to S3 and create db entry.
+router.post('/create'), (req, res) => {
+    (async () => {
+        console.log('Image processing started.')
+        let overall_t0 = performance.now();
+        // gathering params for original image
+        const file = req.files.uploadFile;
+        const user = req.body.ulUsername;
+        const keyPath = 'user/' + user + '/' + file.name;
+        const metaDta = {   eventName: req.body.eventName, 
+                            eventDate: req.body.eventDate      };
+        const originalImgS3Data = await s3uploader(keyPath, file.data, metaDta);
+        console.log(originalImgs3Data);
+    });
+}
+
 
 // POST for testing, gets AWS rekognition data.
 router.post('/detectFaces', (req, res) => {
