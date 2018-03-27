@@ -16,6 +16,8 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
       <script src="js/events.js"></script>
+      <!-- Include Moment.js for date picker -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js"></script>
   </head>
   <body>
     
@@ -29,7 +31,11 @@
           <h3>Create a New Event</h3>
             <form id='uploadForm' action='api/events' method='post' 
                   encType="multipart/form-data">
-              <input type="file" name="uploadFile" accept=".jpg, .jpeg, .png" />
+              <label for="eventName">Enter event name:
+              <input type="text" name="eventName" required /></label>
+              <label for="eventDate">Enter event date:
+              <input type="date" id="eventDate" name="eventDate" required /></label>
+              <input type="file" name="uploadFile" accept=".jpg, .jpeg, .png" required />
               <input type="hidden" name="ulUsername" />
               <input type='submit' value='Upload' />
             </form>

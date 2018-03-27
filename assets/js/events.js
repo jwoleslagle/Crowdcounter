@@ -1,6 +1,6 @@
 'use strict';
 
-//TODO: Secure bucket to prevent anonymous read-only access
+//TODO: Secure bucket to prevent anonymous read-only access - right now it will only display and add to the user's buckets, but this may possibly be circumvented.
 
 function displayResults(rawResult) {
     let encodedPath = '';
@@ -27,6 +27,11 @@ function getUsername() {
 function setUploadUsername(username) {
     $('input[name="ulUsername"]').val(username);
     console.log($('input[name="ulUsername"]').val());
+}
+
+function setDatePickerToToday() {
+    let today = moment().format('YYYY-MM-DD');
+    $('input[name="eventDate"]').val(today);
 }
 
 function showPastEvents(user) {
@@ -58,7 +63,9 @@ function showPastEvents(user) {
 function startPage() {
     const user = getUsername();
     showPastEvents(user);
-    setTimeout(() => { setUploadUsername(user); }, 0);
+    setTimeout(() => { 
+        setUploadUsername(user);
+        setDatePickerToToday();     }, 0);
 }
 
 console.log('Events page loaded.');
