@@ -4,12 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const EventSchema = mongoose.Schema({
-  _id: {
-    type: ObjectId,
-    required: true,
-    unique: true
-    },
-  user: {
+  username: {
     type: String,
     required: true
   },
@@ -31,8 +26,16 @@ const EventSchema = mongoose.Schema({
       required: true
   },
   rekognitionData: {
-    type: Mixed, 
+    type: Object, 
     default: ''
+  },
+  faceBoxes: {
+    type: Object,
+    default: ''
+  },
+  crowdCount: {
+    type: Number,
+    default: 0
   },
   updated: {
       type: Date, 
@@ -42,13 +45,15 @@ const EventSchema = mongoose.Schema({
 
 EventSchema.methods.serialize = function() {
   return {
-    user: this.user || '',
+    eventID: this._id || '',
     eventName: this.eventName || '',
-    eventDate: this.eventDate || ''
+    eventDate: this.eventDate || '',
+    eventImgLocation: this.imgS3Location || '',
+    eventImgKey: this.imgS3Key || ''
   };
 };
 
-Schema_Category.virtual('eventId').get(function() {
+EventSchema.virtual('eventId').get(function() {
     return this._id;
 });
 

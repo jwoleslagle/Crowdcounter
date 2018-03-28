@@ -16,6 +16,8 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
       <script src="js/delete.js"></script>
+      <!-- Include Moment.js for date picker and event data -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js"></script>
   </head>
   <body>
     
@@ -27,8 +29,9 @@
       <section class="form-area" role="region">
         <div class="main-container">
           <h3>Delete this event?</h3>
-          <div class="pastEvent"></div>
+          <div class="eventHeader"></div>
             <form id="deleteForm" action="api/events/remove" encType="multipart/form-data" method="post">
+              <input type="hidden" name="deleteId" />
               <input type="hidden" name="deleteKey" />
               <input type="submit" value="Delete it (for sure - no takebacks!)" />
             </form>

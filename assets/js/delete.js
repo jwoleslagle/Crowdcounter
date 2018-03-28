@@ -1,28 +1,55 @@
 'use strict';
 
-function renderEventHeader(eventKey) {
+function renderEventHeader(eventDetails) {
     let htmlResult= `<ul class="events-list">
-        <li><h4 class="past-event-header">Event Name</h4>
-        <img class="past-event-img"src="https://s3-us-east-2.amazonaws.com/crowdcounter/${eventKey}" />
-        <p class="past-event-date">Tuesday, March 22, 2018</p></li></ul>`;
-    return htmlResult;
+        <li><h4 class="past-event-header">${eventDetails.eventName}</h4>
+        <img class="past-event-img" src="${eventDetails.imgS3Location}" />
+        <p class="past-event-date">${moment(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
+    $('div.eventHeader').html(htmlResult);
 }
 
-function getKeyFromQstring() {
+function getEventDetails(eventId) {
+    $.ajax({
+        contentType: 'application/json',
+        headers: {
+            //TODO: Uncomment Authorization line
+            //Authorization: "JWT" + localStorage.getItem("TOKEN"),
+        },
+        success: (result) => {
+            if (result.eventName) {
+                setDeleteKey(result.imgS3Key);
+                $('div.eventHeader').html(renderEventHeader(result));
+            } else {
+                const alertNoData = 'No past events found.';
+                $('div.eventHeader').html(alertNoData);
+            }
+        },
+        error: (err) => {
+            const alertError = 'Error encountered when retrieving events: ' + err;
+            $('div.eventHeader').html(alertError);
+        },
+        type: 'GET',
+        url: '/api/events/event/' + eventId
+    });
+}
+
+function getEventIDFromQstring() {
     const rawQuerystring = location.search;
-    const key = decodeURI(rawQuerystring.slice(6));
-    return key;
+    return decodeURI(rawQuerystring.slice(6));
+}
+
+function setDeleteID(eid) {
+    $('input[name="deleteId"]').val(eid);
 }
 
 function setDeleteKey(key) {
     $('input[name="deleteKey"]').val(key);
-    console.log($('input[name="deleteKey"]').val());
 }
 
-function watchDeleteSubmit (delKey) {
+function watchDeleteSubmit() {
     $('#deleteForm').submit(function (e) {
-        e.preventDefault();//prevent the default action
-
+        e.preventDefault(); //prevent the default action
+        //delete the event DB entry and S3 image object
         $.ajax({
             contentType: 'application/json',
             headers: {
@@ -47,12 +74,10 @@ function watchDeleteSubmit (delKey) {
 
 //callback function to render page
 function startPage() {
-    const deleteKey = getKeyFromQstring();
-    watchDeleteSubmit(deleteKey);
-    setTimeout(() => {  
-        $('div.pastEvent').html(renderEventHeader(deleteKey)); 
-        setDeleteKey(deleteKey);
-    }, 0);
+    const deleteId = getEventIDFromQstring();
+    getEventDetails(deleteId);
+    setTimeout(() => { setDeleteID(deleteId); }, 0);
+    watchDeleteSubmit();
 }
 
 console.log('Delete page loaded.');

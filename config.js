@@ -9,4 +9,3 @@ exports.JWT_EXPIRY = process.env.JWT_EXPIRY || '7d';
 exports.BUCKET_NAME = process.env.BUCKET_NAME;
 exports.REGION = process.env.REGION;
 exports.IDENTITY_POOL_ID = process.env.IDENTITY_POOL_ID;
-exports.BUILD_DIR = process.env.BUILD_DIR;

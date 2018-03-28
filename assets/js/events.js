@@ -6,13 +6,12 @@ function displayResults(rawResult) {
     let encodedPath = '';
     let htmlResult= '<ul class="events-list">';
     rawResult.forEach((obj) => {
-        encodedPath = encodeURI(obj.Key);
         htmlResult += `<li class="event">
-        <h4 class="past-event-header">Event Name</h4>
-        <img class="past-event-img"src="https://s3-us-east-2.amazonaws.com/crowdcounter/${obj.Key}" />
-        <p class="past-event-date">Tuesday, March 22, 2018</p>
+        <h4 class="past-event-header">${obj.eventName}</h4>
+        <img class="past-event-img" src="${obj.imgS3Location}" />
+        <p class="past-event-date">${moment(obj.eventDate).format('dddd, MMMM Do, YYYY')}</p>
         <div class="links">
-            <a class="event-details-link" href="/details?evnt=${encodedPath}">Event Details</a> | <a class="delete-link" href="/delete?evnt=${encodedPath}" alt="Delete this event">Delete</div>
+            <a class="event-details-link" href="/details?evnt=${obj._id}">Event Details</a> | <a class="delete-link" href="/delete?evnt=${obj._id}" alt="Delete this event">Delete</div>
         </a><br /><hr /></li>`;
     });
     htmlResult += '</ul>';
@@ -26,7 +25,6 @@ function getUsername() {
 
 function setUploadUsername(username) {
     $('input[name="ulUsername"]').val(username);
-    console.log($('input[name="ulUsername"]').val());
 }
 
 function setDatePickerToToday() {

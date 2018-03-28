@@ -31,8 +31,7 @@
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "pureimage": "^0.1.4"
+    "passport-local": "^1.0.0"
   },
   "repository": {
     "type": "git",

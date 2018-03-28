@@ -56,11 +56,16 @@
     margin: 5px;
   }
 
+  .event-details-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
   .events-list {
     list-style-type: none;
     padding: 0;
   }
-  
+
   .form-area {
     display: flex;
     justify-content: center;
