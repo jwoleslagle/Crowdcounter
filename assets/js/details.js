@@ -3,12 +3,14 @@
 function renderEventHeader(eventDetails) {
     let htmlResult= `<ul class="events-list">
         <li><h4 class="past-event-header">${eventDetails.eventName}</h4>
-        <img class="past-event-img" src="${eventDetails.imgS3Location}" />
+        <div class="event-img-container">
+            <canvas id="imgCanvas"></canvas>
+        </div>
         <p class="past-event-date">${moment(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
     $('div.eventHeader').html(htmlResult);
     if (eventDetails.faceBoxes[0] && eventDetails.crowdCount > 0) {
-        drawFaceBoxes(eventDetails.faceBoxes);
         renderEventBody(eventDetails);
+        drawFaceBoxes(eventDetails);
     } else {
         const htmlNoData = `<ul class="event-details-list">
         <li>No faces found. Please try again with a different image.</li>
@@ -19,7 +21,7 @@ function renderEventHeader(eventDetails) {
 
 function renderEventBody(eventData) {
     let htmlResult= `<ul class="event-details-list">
-        <li>Crowd Count: ${eventDetails.crowdCount}</li>
+        <li>Crowd Count: ${eventData.crowdCount}</li>
         </ul>`;
     $('div.eventBody').html(htmlResult);
 }
@@ -59,32 +61,37 @@ function getEventDetails(eventId) {
     });
 }
 
-function drawFaceBoxes() {
+function drawFaceBoxes(eventData) {
     console.log('drawFaceBoxes ran.');
-    // Some salvaged code that might be helpful...
-    // PImage.decodeJPEGFromStream(s3.getObject(img1Params).createReadStream()).then((img) => {
-    //     let img2 = PImage.make(img.width, img.height);
-    //     let ctx = img2.getContext('2d');
-    //     ctx.drawImage(img, 0, 0, img.width, img.height); // source dimensions
-    //     //     0, 0, img.width, img.height,                 // destination dimensions
-    //     // );
-    //     //ctx.fillStyle = 'rgba(0,0,0, 0.0)';
-    //     ctx.strokeStyle = 'white';
-    //     ctx.lineWidth = 2;
+    var canvas = document.getElementById('imgCanvas');
+    var ctx = canvas.getContext('2d');
+    var image = new Image;
+    image.src = eventData.imgS3Location;
+    image.onload = drawBoxes;
 
-    //     const imgWidth = img.width;
-    //     const imgHeight = img.height;
-
-    //     boxesOnly.forEach((e) => {
-    //         ctx.strokeRect(e.Left * imgWidth, e.Top * imgHeight, e.Width * imgWidth, e.Height * imgHeight);
-    //     });
+    function drawBoxes() {
+        let imgWidth = this.naturalWidth;
+        let imgHeight = this.naturalHeight;
+        let elementWidth = 400;
+        canvas.width = elementWidth;
+        canvas.height = (elementWidth * imgHeight / imgWidth);
+        console.log(this.width + ' ' + this.height)
+        // Figure out why this is clipping the image.
+        ctx.drawImage(this, 0, 0, imgWidth, imgHeight, 0, 0, canvas.width, canvas.height);
+        //ctx.globalCompositeOperation = 'overlay';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        eventData.faceBoxes.forEach((e) => {
+            ctx.strokeRect((e.Left * canvas.width), (e.Top * canvas.height), (e.Width * canvas.width), (e.Height * canvas.height));
+        });
+    }
 }
 
 //callback function to render page
 function startPage() {
     const eventId = getEventIdFromQstring();
     const eventDetails = getEventDetails(eventId);
-    setTimeout(() => {  
+    setTimeout(() => {
         $('div.links').html(renderLinks(eventId));
     }, 0);
 }

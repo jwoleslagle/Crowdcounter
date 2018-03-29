@@ -56,7 +56,7 @@ router.get('/event/:id', (req, res) => {
     });
 });
 
-// POST to upload an event image, process it, write results to the DB, then redirect the user to the event details page for the new event ID.
+// POST to upload an event image to S3, process it with Rekognition, write process results to the DB, then redirect the user to the event details page for the new event ID.
 router.post('/', function (req, res) {  
     console.log('Image processing started.')
     let overall_t0 = performance.now();
@@ -92,11 +92,14 @@ router.post('/', function (req, res) {
         //Then uses runRekognition to perform facial recognition on image...
         let rekognition = new AWS.Rekognition();
         const detectParams = {
+            Attributes: [ "ALL" ],
             Image: {
-            S3Object: {
-            Bucket: bucketName, 
-            Name: imgDta1.Key
-            } } };
+                S3Object: {
+                    Bucket: bucketName, 
+                    Name: imgDta1.Key
+                } 
+            }
+        };
 
         rekognition.detectFaces(detectParams).promise()
         .then((faceData) => {
@@ -110,7 +113,7 @@ router.post('/', function (req, res) {
             //Then extracts interesting data from the raw facial recognition data to use as img2 metadata... 
             let summary = { crowdCount: faceData.FaceDetails.length };
 
-            //Then creates a copy of the image and draws face boxes on it, and saves it in a separate S3 folder. creates key to the marked up image.
+            //boxesOnly is used on the client side to draw face boxes on the image.
             let boxesOnly = faceData.FaceDetails.map((FaceDetails, index, dataset) => {
                 return FaceDetails.BoundingBox;
             })

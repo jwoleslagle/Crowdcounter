@@ -2,7 +2,6 @@
     background-color: #3f94e7;
     font-family: 'Roboto', sans-serif;
   }
-
     
   button {
     display: block;
@@ -20,6 +19,10 @@
     border-radius: 3px;
   }
 
+  canvas {
+    width: 100%;
+  }
+
   fieldset {
     border: none;
     text-align: center;
@@ -29,6 +32,10 @@
   
   header {
     text-align: center;
+  }
+
+  input::placeholder {
+    color: gray;
   }
  
   label {
@@ -61,6 +68,10 @@
     padding: 0;
   }
 
+  .event-img-container {
+    width: 100%;
+  }
+
   .events-list {
     list-style-type: none;
     padding: 0;
@@ -69,6 +80,15 @@
   .form-area {
     display: flex;
     justify-content: center;
+  }
+
+  .input-field {
+    width: 286px;
+    padding: 15px;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+    background-color: ghostwhite;
+    color: gray;
   }
 
   .main-container {
@@ -83,19 +103,6 @@
     font-size: 2em;
   }
   
-  .input-field {
-    width: 286px;
-    padding: 15px;
-    border: 2px solid lightgray;
-    border-radius: 3px;
-    background-color: ghostwhite;
-    color: gray;
-  }
-  
-  input::placeholder {
-    color: gray;
-  }
-  
   .main-bottom-notice {
     color: white;
     font-weight: bold;
@@ -107,6 +114,10 @@
   .main-bottom-notice a {
     color: white;
     font-weight: bold;
+  }
+
+  .past-event-img {
+    width: 100%;
   }
 
   .submit-button:hover {
