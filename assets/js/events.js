@@ -18,6 +18,14 @@ function displayResults(rawResult) {
     return htmlResult;
 }
 
+function getStatusFromQstring() {
+    const rawQuerystring = location.search;
+    if (rawQuerystring.includes == 'deleteSuccess') {
+		const signupSuccess = 'Event deleted successfully.';
+		alertUser(signupSuccess);
+	}
+}
+
 function getUsername() {
     //TODO: page should pull username from jwt
     return 'test2';

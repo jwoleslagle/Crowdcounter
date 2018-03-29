@@ -14,6 +14,8 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
     <script src="js/signup.js"></script>
+      <!-- Include reCaptcha -->
+      <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   <body>
     <header role="banner">
@@ -28,15 +30,16 @@
           </div>
           <form>
             <fieldset>
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" placeholder="foo@bar.com" name="email" class="input-field js-uname-entry" />
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" placeholder="Min 4 chars " name="email" class="input-field js-uname-entry" required />
               <label for="password">Password</label>
-              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" />
+              <input type="password" id="password" placeholder="Min 8 chars" name="password" class="input-field js-pword-entry" autocomplete="off" required />
               <label for="firstName" class="form-label">First Name</label>
-              <input type="text" id="firstName" placeholder="Jonathan" name="firstName" class="input-field js-fname-entry" />
+              <input type="text" id="firstName" placeholder="Jaughn" name="firstName" class="input-field js-fname-entry" />
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" placeholder="Doeregard" name="lastName" class="input-field js-lname-entry" />
+              <input type="text" id="lastName" placeholder="Deaux" name="lastName" class="input-field js-lname-entry" />
             </fieldset>
+            <div class="g-recaptcha" data-sitekey="6LdynU8UAAAAAJN-iH7fuXPM2iG3zNGIHBvwgs56"></div>
             <button class="submit-button js-signup-button" type="button">Sign up</button>
           </form>
         </div>

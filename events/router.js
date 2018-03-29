@@ -144,7 +144,9 @@ router.post('/remove', (req, res) => {
     s3.deleteObject(deleteParams).promise().then((err, data) => {
         // remove the entry from the database
         Event.remove(delId).then((err, data) => {
-            res.status(301).redirect('/events?=deleteSuccess'); 
+            //Add a cachebuster to prevent a cached version of the redirect page (with a deleted event) from serving. This part of the query string is meaningless.
+            let rando = encodeURI([...Array(8)].map(() => Math.random().toString(36)[3]).join(''));
+            res.status(301).redirect('/events?=deleteSuccess&cachebustr=' + rando); 
         });
     }).catch(err => {
         res.status(500).json({message: 'Internal server error: ' + err.message});

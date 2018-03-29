@@ -1,39 +1,45 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Crowdcounter App</title>
-</head>
-
-<body>
-
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta description="Login page for Crowdcounter app">
+    <title>Crowdcounter - Login Page</title>
+    <!--Stylesheets and Fonts-->
+      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <!-- Linking Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--Scripts-->
+      <!-- Include JQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <!-- Include JS specific to page -->
+      <script src="js/login.js"></script>
+  </head>
+  <body>
+    
     <header role="banner">
-        <nav role="navigation">
-
-        </nav>
+      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
     </header>
 
     <main role="main">
+      <section class="form-area" role="region">
+        <div class="main-container">
+          <h1>Welcome</h1>
+          <p>Crowdcounter is a simple project which attempts to count the number of people in a snapshot of a crowd using Amazon's Rekognition facial recognition service.</p>
+          <p>It has some limitations...</p>
+          <ul>
+              <li>Images must be stored to be analyzed. Storage is cheap, but not free, so sign-in is required.</li>
+              <li>Ideally, the crowd in the picture should be <strong>facing the camera with good, flat light</strong> (think of your 3rd grade class picture).</li>
+              <li>Even then, it might not work very well! With Rekognition I'm seeing about 30-70% of faces recognized - your mileage may vary. I hope to make this a platform to try out different solutions - maybe even one of my own eventually!</li>
+              <li>At present, Rekognition can only spot a maximum of 100 people per image. </li>
+              <li>I have a wishlist a mile long for this project, but the primary goal was to learn the basics of Node.js, Express, AWS S3 and Rekognition, and MongoDb. As such, if you spot any issues, feedback (via the GitHub page) is always appreciated.</li>
+          </ul>
 
-    <section role="region">
-
-        <article role="article">
-        <header>
-                <h2>Start Page</h2>
-            </header>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        </article>
-
-    </section>
-
-    <aside role="complementary">
-    </aside>
-
+        </div>
+      </section>
+      <div class="main-bottom-notice">Ready to begin? <a href="/login">Log in</a>!</div>
+      <div class="main-bottom-notice">Don't have an account? <a href="/signup">Sign up</a>!</div>
     </main>
 
-    <footer role="contentinfo">
-    </footer>
-
-</body>
+  </body>
 </html>
