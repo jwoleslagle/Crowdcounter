@@ -10,7 +10,6 @@ button {
   margin-top: 15px;
   height: 55px;
   width: 320px;
-  margin-bottom: 50px;
   color: white;
   font-size: 1.3em;
   font-weight: bold;
@@ -48,10 +47,21 @@ label {
 .alert-area {
   color: royalblue;
   background-color: rgba(65, 105, 225, 0.1);
+  margin-top: 10px;
 }
 
 .alert-container {
   text-align: center;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .delete-link {
@@ -106,7 +116,6 @@ label {
   padding-bottom: 1.1em;
 }
 
-
 .main-container {
   background-color: white;
   text-align: center;
@@ -138,4 +147,22 @@ label {
 
 .submit-button:hover {
   background-color: seagreen;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.upload-form {
+  padding-left: 20px;
 }

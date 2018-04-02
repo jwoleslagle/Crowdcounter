@@ -35,13 +35,13 @@
               <label for="password">Enter a password</label>
               <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" required />
               <label for="password">Retype the same password:</label>
-              <input type="password" id="password" placeholder="You know the drill..." name="password" class="input-field js-pwordB-entry" autocomplete="off" required />
+              <input type="password" id="passwordB" placeholder="You know the drill..." name="passwordB" class="input-field js-pwordB-entry" autocomplete="off" required />
               <label for="firstName" class="form-label">What's your first name?</label>
-              <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" class="input-field js-fname-entry" />
+              <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" autocomplete="given-name" class="input-field js-fname-entry" />
               <label for="email">How's about an email address?</label>
-              <input type="email" id="email" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" class="input-field js-email-entry" />
+              <input type="email" id="email" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" autocomplete='email' class="input-field js-email-entry" />
             </fieldset>
-            <div class="g-recaptcha" data-sitekey="6LdynU8UAAAAAJN-iH7fuXPM2iG3zNGIHBvwgs56"></div>
+            <!-- <div class="g-recaptcha" data-sitekey="6LdynU8UAAAAAJN-iH7fuXPM2iG3zNGIHBvwgs56"></div> -->
             <button class="submit-button js-signup-button" type="button">Sign up</button>
           </form>
         </div>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta description="Login page for Crowdcounter app">
-    <title>Crowdcounter - Login Page</title>
+    <meta description="Delete an Event - Crowdcounter">
+    <title>Crowdcounter - Delete Event</title>
     <!--Stylesheets and Fonts-->
       <link href="css/main.css" rel="stylesheet" type="text/css" />
       <!-- Linking Google Fonts -->
@@ -31,8 +31,8 @@
           <h3>Delete this event?</h3>
           <div class="eventHeader"></div>
             <form id="deleteForm" action="api/events/remove" encType="multipart/form-data" method="post">
-              <input type="hidden" name="deleteId" />
-              <input type="hidden" name="deleteKey" />
+              <input type="hidden" name="deleteId" id="deleteId" />
+              <input type="hidden" name="deleteKey" id="deleteKey" />
               <input type="submit" value="Delete it (for sure - no takebacks!)" />
             </form>
             <br />

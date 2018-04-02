@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta description="Login page for Crowdcounter app">
-    <title>Crowdcounter - Login Page</title>
+    <meta description="Events page for Crowdcounter app">
+    <title>Crowdcounter - Events Page</title>
     <!--Stylesheets and Fonts-->
       <link href="css/main.css" rel="stylesheet" type="text/css" />
       <!-- Linking Google Fonts -->
@@ -28,19 +28,23 @@
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
+          <div class="alert-container js-alert-container">
+              <div class="alert-area js-alert-area"></div>
+          </div>
           <h3>Create a New Event</h3>
-            <form id='uploadForm' action='api/events' method='post' 
-                  encType="multipart/form-data">
+          <form id="uploadForm" class="upload-form" action="/api/events" encType="multipart/form-data" method="POST">
               <label for="eventName">Enter event name:
-              <input type="text" name="eventName" required /></label>
+              <input type="text" id="eventName" name="eventName" required /></label>
               <label for="eventDate">Enter event date:
               <input type="date" id="eventDate" name="eventDate" required /></label>
-              <input type="file" name="uploadFile" accept=".jpg, .jpeg" required />
-              <input type="hidden" name="ulUsername" />
-              <input type='submit' value='Upload' />
-            </form>
-            <br />
-            <hr />
+              <div class="upload-btn-wrapper">
+                <button class="btn">Upload a Crowd Image</button>
+                <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg" required />
+              </div>
+              <button type="submit">Create the Event</button>
+          </form>
+          <br />
+          <hr />
           <h3>Past Events</h3>
             <div class="eventsList"></div>
         </div>

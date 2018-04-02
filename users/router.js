@@ -123,8 +123,8 @@ router.post('/', jsonParser, function(req, res) {
     })
     .then(user => {
       return res
-      .status(201).json(user.serialize())
-      .status(301).redirect('/login?=signupSuccess');
+      // .redirect('/login?=signupSuccess') //can't redirect with a JSON
+      .status(201).json(user.serialize());
     })
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500

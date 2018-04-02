@@ -40,17 +40,15 @@ function handleSignupClick() {
 					dataType: 'json',
 					success: function(data){
 						if (data.username) {
-							const alertSuccess = `Welcome ${data.username}! Please log in.`;
-							window.location.replace('/login?=welcome');
-							alertUser(alertSuccess);
+							window.location.replace("/login?=welcome");
 						} else {
 							clearInputs();
 							const alertInvalid = 'Please enter a valid username and/or password.';
 							alertUser(alertInvalid);
 						}
 					},
-					error: function(){
-						const alertError = 'Error encountered in POST.';
+					error: function(err){
+						const alertError = err.message;
 						alertUser(alertError);
 					},
 					type: 'POST',

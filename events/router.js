@@ -64,7 +64,7 @@ router.get('/event/:id', jwtAuth, (req, res) => {
 });
 
 // POST to upload an event image to S3, process it with Rekognition, write process results to the DB, then redirect the user to the event details page for the new event ID.
-router.post('/', jwtAuth, function (req, res) {  
+router.post('/', jwtAuth, (req, res) => {
     console.log('Image processing started.')
     let overall_t0 = performance.now();
     // gathering params for original image
@@ -148,16 +148,17 @@ router.post('/', jwtAuth, function (req, res) {
 //This is actually a DELETE method but was prevented as such by browser - TODO: Research / implement 'method override"
 router.post('/remove', jwtAuth, (req, res) => {
     const delKey = req.body.deleteKey;
-    const delId = { _id: req.body.deleteId };
-    // call S3 to delete specified object
+    const delId = req.body.deleteId;
     const deleteParams = {Bucket: bucketName, Key: delKey};
-    s3.deleteObject(deleteParams).promise().then((err, data) => {
-        //Add a cachebuster to prevent a cached version of the redirect page (with a deleted event) from serving. This part of the query string is meaningless.
-        let rando = encodeURI([...Array(8)].map(() => Math.random().toString(36)[3]).join(''));
-        res.status(301).redirect('/events?=deleteSuccess&cachebustr=' + rando); 
-    }).catch(err => {
-        res.status(500).json({message: 'Internal server error: ' + err.message});
-    });  
+    // Remove database entry
+    Event.findByIdAndRemove(delId). then (() => {
+        // Then call S3 to delete the object specified by the key.
+        s3.deleteObject(deleteParams).promise().then((err, data) => {
+            res.status(204).end(); 
+        }).catch(err => {
+            res.status(500).json({message: 'Internal server error: ' + err.message});
+        });  
+    })
 });
 
 module.exports = {router};

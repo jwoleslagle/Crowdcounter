@@ -41,8 +41,7 @@ function getEventDetails(eventId) {
     $.ajax({
         contentType: 'application/json',
         headers: {
-            //TODO: Uncomment Authorization line
-            //Authorization: "JWT" + localStorage.getItem("TOKEN"),
+            Authorization: 'Bearer ' + window.localStorage.getItem("Bearer")
         },
         success: (result) => {
             if (result.eventName) {

@@ -13,7 +13,7 @@ function clearInputs() {
 
 function getStatusFromQstring() {
     const rawQuerystring = location.search;
-    if (rawQuerystring == '?=signupSuccess') {
+    if (rawQuerystring == '?=welcome') {
 		const signupSuccess = 'Signup successful! Please log in.';
 		alertUser(signupSuccess);
 	}
