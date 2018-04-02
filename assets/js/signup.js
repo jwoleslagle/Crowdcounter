@@ -13,6 +13,8 @@ function clearInputs() {
 }
 
 function handleSignupClick() {
+	//reminder - send recaptcha token to https://www.google.com/recaptcha/api/siteverify
+
 	console.log('handleSignupClick ran.');
 	$('.js-signup-button').click(function(e) {
 		e.preventDefault();

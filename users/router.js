@@ -59,10 +59,10 @@ router.post('/', jsonParser, function(req, res) {
 
   const sizedFields = {
     username: {
-      min: 1
+      min: 5
     },
     password: {
-      min: 10,
+      min: 8,
       // bcrypt truncates after 72 characters, so let's not give the illusion
       // of security by storing extra (unused) info
       max: 72
@@ -122,7 +122,8 @@ router.post('/', jsonParser, function(req, res) {
       });
     })
     .then(user => {
-      return res.status(201).json(user.serialize());
+      return res.status(301).redirect('/login?=signupSuccess');
+      //return res.status(201).json(user.serialize());
     })
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500

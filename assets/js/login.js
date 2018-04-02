@@ -11,6 +11,14 @@ function clearInputs() {
 	$('.js-pword-entry').val() = '';
 }
 
+function getStatusFromQstring() {
+    const rawQuerystring = location.search;
+    if (rawQuerystring == '?=signupSuccess') {
+		const signupSuccess = 'Signup successful! Please log in.';
+		alertUser(signupSuccess);
+	}
+}
+
 function handleLoginSubmit() {
 	console.log('handleLoginSubmit ran.');
 	$('.js-login-button').click(function(e) {
@@ -54,8 +62,9 @@ function handleLoginSubmit() {
 
 //Document ready callback function - powers the page.
 function renderLoginPage() {
+	getStatusFromQstring();
 	handleLoginSubmit();
 }
 
-console.log('App started. Login page loaded.');
+console.log('Login page loaded.');
 $(renderLoginPage);

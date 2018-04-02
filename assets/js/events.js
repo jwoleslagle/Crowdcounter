@@ -18,9 +18,13 @@ function displayResults(rawResult) {
     return htmlResult;
 }
 
-// function setUploadUsername(username) {
-//     $('input[name="ulUsername"]').val(username);
-// }
+function getStatusFromQstring() {
+    const rawQuerystring = location.search;
+    if (rawQuerystring.includes == 'deleteSuccess') {
+		const signupSuccess = 'Event deleted successfully.';
+		alertUser(signupSuccess);
+	}
+}
 
 function setDatePickerToToday() {
     let today = moment().format('YYYY-MM-DD');

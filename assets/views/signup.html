@@ -14,6 +14,8 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
     <script src="js/signup.js"></script>
+      <!-- Include reCaptcha -->
+      <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
   <body>
     <header role="banner">
@@ -36,9 +38,10 @@
               <input type="password" id="password" placeholder="You know the drill..." name="password" class="input-field js-pwordB-entry" autocomplete="off" required />
               <label for="firstName" class="form-label">What's your first name?</label>
               <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" class="input-field js-fname-entry" />
-              <label for="lastName">How's about an email address?</label>
-              <input type="email" id="lastName" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" class="input-field js-email-entry" />
+              <label for="email">How's about an email address?</label>
+              <input type="email" id="email" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" class="input-field js-email-entry" />
             </fieldset>
+            <div class="g-recaptcha" data-sitekey="6LdynU8UAAAAAJN-iH7fuXPM2iG3zNGIHBvwgs56"></div>
             <button class="submit-button js-signup-button" type="button">Sign up</button>
           </form>
         </div>
