@@ -263,18 +263,18 @@ describe('/api/user', function() {
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
             expect(res.body.message).to.equal(
-              'Must be at least 1 characters long'
+              'Must be at least 5 characters long'
             );
             expect(res.body.location).to.equal('username');
           });
       });
-      it('Should reject users with password less than ten characters', function() {
+      it('Should reject users with password less than eight characters', function() {
         return chai
           .request(app)
           .post('/api/users')
           .send({
             username,
-            password: '123456789',
+            password: '1234567',
             firstName,
             email
           })
@@ -290,7 +290,7 @@ describe('/api/user', function() {
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
             expect(res.body.message).to.equal(
-              'Must be at least 10 characters long'
+              'Must be at least 8 characters long'
             );
             expect(res.body.location).to.equal('password');
           });
@@ -424,46 +424,47 @@ describe('/api/user', function() {
       });
     });
 
-    describe('GET', function() {
-      it('Should return an empty array initially', function() {
-        return chai.request(app).get('/api/users').then(res => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body).to.have.length(0);
-        });
-      });
-      it('Should return an array of users', function() {
-        return User.create(
-          {
-            username,
-            password,
-            firstName,
-            email
-          },
-          {
-            username: usernameB,
-            password: passwordB,
-            firstName: firstNameB,
-            email: emailB
-          }
-        )
-          .then(() => chai.request(app).get('/api/users'))
-          .then(res => {
-            expect(res).to.have.status(200);
-            expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(2);
-            expect(res.body[0]).to.deep.equal({
-              username,
-              firstName,
-              email
-            });
-            expect(res.body[1]).to.deep.equal({
-              username: usernameB,
-              firstName: firstNameB,
-              email: emailB
-            });
-          });
-      });
-    });
+    // This test removed - too risky to expose users array.
+    // describe('GET', function() {
+    //   it('Should return an empty array initially', function() {
+    //     return chai.request(app).get('/api/users').then(res => {
+    //       expect(res).to.have.status(200);
+    //       expect(res.body).to.be.an('array');
+    //       expect(res.body).to.have.length(0);
+    //     });
+    //   });
+    //   it('Should return an array of users', function() {
+    //     return User.create(
+    //       {
+    //         username,
+    //         password,
+    //         firstName,
+    //         email
+    //       },
+    //       {
+    //         username: usernameB,
+    //         password: passwordB,
+    //         firstName: firstNameB,
+    //         email: emailB
+    //       }
+    //     )
+    //       .then(() => chai.request(app).get('/api/users'))
+    //       .then(res => {
+    //         expect(res).to.have.status(200);
+    //         expect(res.body).to.be.an('array');
+    //         expect(res.body).to.have.length(2);
+    //         expect(res.body[0]).to.deep.equal({
+    //           username,
+    //           firstName,
+    //           email
+    //         });
+    //         expect(res.body[1]).to.deep.equal({
+    //           username: usernameB,
+    //           firstName: firstNameB,
+    //           email: emailB
+    //         });
+    //       });
+    //   });
+    // });
   });
 });

@@ -122,8 +122,9 @@ router.post('/', jsonParser, function(req, res) {
       });
     })
     .then(user => {
-      return res.status(301).redirect('/login?=signupSuccess');
-      //return res.status(201).json(user.serialize());
+      return res
+      .status(201).json(user.serialize())
+      .status(301).redirect('/login?=signupSuccess');
     })
     .catch(err => {
       // Forward validation errors on to the client, otherwise give a 500
@@ -135,14 +136,14 @@ router.post('/', jsonParser, function(req, res) {
     });
 });
 
-// Never expose all your users like below in a prod application
-// we're just doing this so we have a quick way to see
-// if we're creating users. keep in mind, you can also
-// verify this in the Mongo shell.
-router.get('/', (req, res) => {
-  return User.find()
-    .then(users => res.json(users.map(user => user.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
-});
+// // Never expose all your users like below in a prod application
+// // we're just doing this so we have a quick way to see
+// // if we're creating users. keep in mind, you can also
+// // verify this in the Mongo shell.
+// router.get('/', (req, res) => {
+//   return User.find()
+//     .then(users => res.json(users.map(user => user.serialize())))
+//     .catch(err => res.status(500).json({message: 'Internal server error'}));
+// });
 
 module.exports = {router};
