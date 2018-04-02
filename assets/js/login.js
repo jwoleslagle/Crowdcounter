@@ -30,7 +30,7 @@ function handleLoginSubmit() {
 				dataType: 'json',
 				success: function(response){
 					if (response.authToken) {
-						Storage.setItem("TOKEN", response.authToken);
+						window.localStorage.setItem("Bearer", response.authToken);
 						window.location.replace('/events?=welcome');
 					} else {
 						clearInputs();

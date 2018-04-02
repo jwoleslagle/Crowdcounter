@@ -21,13 +21,13 @@ describe('Protected endpoint', function() {
   const firstName = 'Example';
   const lastName = 'User';
 
-  before(() => {
-    return runServer();
-  });
+  // before(() => {
+  //   return runServer();
+  // });
 
-  after(() => {
-    return closeServer();
-  });
+  // after(() => {
+  //   return closeServer();
+  // });
 
   beforeEach(() => {
     return User.hashPassword(password).then(password =>

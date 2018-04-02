@@ -85,6 +85,7 @@ app.get('/details', (req, res) => {
   res.sendFile(__dirname + '/assets/views/details.html');
 });
 
+
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found' });
 });

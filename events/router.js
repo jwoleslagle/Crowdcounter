@@ -4,7 +4,8 @@ const   express = require('express'),
         router = express.Router(),
         jsonParser = bodyParser.json(),
         config = require('../config'),
-
+        passport = require('passport'),
+        jwt = require('jsonwebtoken'),
         fileUpload = require('express-fileupload'),
 
         bucketName = config.BUCKET_NAME,
@@ -12,6 +13,8 @@ const   express = require('express'),
         IdentityPoolId = config.IDENTITY_POOL_ID;
 
 const {Event} = require('./models');
+
+const { router: authRouter, jwtStrategy } = require('../auth');
 
 // Load the Node performance timing API for timing image processing.
 const { performance } = require('perf_hooks');
@@ -33,9 +36,13 @@ AWS.config.update({
     })
   });
 
-// Get to return all event files in S3 folder.
-router.get('/', (req, res) => {
-    const query = { username: req.headers.username };
+passport.use(jwtStrategy);
+
+const jwtAuth = passport.authenticate('jwt', { session: false, failureRedirect: '/login' });
+
+// Get to return all events for user.
+router.get('/', jwtAuth, (req, res) => {
+    const query = { username: req.user.username };
     //fields to return from query are called projections, : 1 or : true to include, _id is always returned.
     const projections = { eventName: 1, eventDate: 1, imgS3Location: 1 }; 
     Event.find(query, projections).then((data) => {
@@ -46,7 +53,7 @@ router.get('/', (req, res) => {
 });
 
 // Get to return all fields from single event document.
-router.get('/event/:id', (req, res) => {
+router.get('/event/:id', jwtAuth, (req, res) => {
     const query = { _id: req.params.id };
     //fields to return from query are called projections, : 1 or : true to include, _id is always returned.
     Event.findOne(query).then((data) => {
@@ -57,12 +64,12 @@ router.get('/event/:id', (req, res) => {
 });
 
 // POST to upload an event image to S3, process it with Rekognition, write process results to the DB, then redirect the user to the event details page for the new event ID.
-router.post('/', function (req, res) {  
+router.post('/', jwtAuth, function (req, res) {  
     console.log('Image processing started.')
     let overall_t0 = performance.now();
     // gathering params for original image
     const file = req.files.uploadFile;
-    const user = req.body.ulUsername;
+    const user = req.user.username;
     const keyPath = 'user/' + user + '/' + file.name;
     const eventID = { _id: '' };
 
@@ -92,7 +99,6 @@ router.post('/', function (req, res) {
         //Then uses runRekognition to perform facial recognition on image...
         let rekognition = new AWS.Rekognition();
         const detectParams = {
-            Attributes: [ "ALL" ],
             Image: {
                 S3Object: {
                     Bucket: bucketName, 
@@ -127,7 +133,11 @@ router.post('/', function (req, res) {
                 //loads event details page with event ID
                 const target = `/details?evnt=${encodeURI(eventID._id)}`;
                 res.redirect(target);
-            });
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({message: 'Internal server error: ' + err});
+           });
         });
     }).catch(err => {
          console.log(err);
@@ -136,16 +146,15 @@ router.post('/', function (req, res) {
 });
 
 //This is actually a DELETE method but was prevented as such by browser - TODO: Research / implement 'method override"
-router.post('/remove', (req, res) => {
+router.post('/remove', jwtAuth, (req, res) => {
     const delKey = req.body.deleteKey;
     const delId = { _id: req.body.deleteId };
     // call S3 to delete specified object
     const deleteParams = {Bucket: bucketName, Key: delKey};
     s3.deleteObject(deleteParams).promise().then((err, data) => {
-        // remove the entry from the database
-        Event.remove(delId).then((err, data) => {
-            res.status(301).redirect('/events?=deleteSuccess'); 
-        });
+        //Add a cachebuster to prevent a cached version of the redirect page (with a deleted event) from serving. This part of the query string is meaningless.
+        let rando = encodeURI([...Array(8)].map(() => Math.random().toString(36)[3]).join(''));
+        res.status(301).redirect('/events?=deleteSuccess&cachebustr=' + rando); 
     }).catch(err => {
         res.status(500).json({message: 'Internal server error: ' + err.message});
     });  

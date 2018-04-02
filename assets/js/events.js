@@ -18,27 +18,20 @@ function displayResults(rawResult) {
     return htmlResult;
 }
 
-function getUsername() {
-    //TODO: page should pull username from jwt
-    return 'test2';
-}
-
-function setUploadUsername(username) {
-    $('input[name="ulUsername"]').val(username);
-}
+// function setUploadUsername(username) {
+//     $('input[name="ulUsername"]').val(username);
+// }
 
 function setDatePickerToToday() {
     let today = moment().format('YYYY-MM-DD');
     $('input[name="eventDate"]').val(today);
 }
 
-function showPastEvents(user) {
+function showPastEvents() {
     $.ajax({
         contentType: 'application/json',
         headers: {
-            //TODO: Uncomment Authorization line
-            //Authorization: "JWT" + localStorage.getItem("TOKEN"),
-            username: user
+            Authorization: 'Bearer ' + window.localStorage.getItem("Bearer"),
         },
         success: (result) => {
             if (result[0]) {
@@ -57,12 +50,35 @@ function showPastEvents(user) {
     });
 }
 
+function watchUploadSubmit() {
+    $('#uploadForm').submit(function (e) {
+        e.preventDefault(); //prevent the default action
+        //create the S3 image object, analyze it, and create the event DB entry
+        $.ajax({
+            contentType: 'application/json',
+            headers: {
+                Authorization: "JWT" + localStorage.getItem("Bearer"),
+            },
+            success: (result) => {
+                if (!result) {
+                    const alertNoData = 'No events found.';
+                    $('div.eventsList').html(alertNoData);
+                }
+            },
+            error: (err) => {
+                const alertError = 'Error encountered when retrieving events: ' + err;
+                $('div.eventsList').html(alertError);
+            },
+            type: 'POST',
+            url: '/api/events/'
+        });
+    });
+}
+
 //callback function to render page
 function startPage() {
-    const user = getUsername();
-    showPastEvents(user);
+    showPastEvents();
     setTimeout(() => { 
-        setUploadUsername(user);
         setDatePickerToToday();     }, 0);
 }
 

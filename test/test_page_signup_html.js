@@ -16,17 +16,17 @@ describe('Users', () => {
   // doing `return runServer`. If we didn't return a promise here,
   // there's a possibility of a race condition where our tests start
   // running before our server has started.
-  before(() => {
-    return runServer();
-  });
+  // before(() => {
+  //   return runServer();
+  // });
 
-  // Close server after these tests run in case
-  // we have other test modules that need to 
-  // call `runServer`. If server is already running,
-  // `runServer` will error out.
-  after(() => {
-    return closeServer();
-  });
+  // // Close server after these tests run in case
+  // // we have other test modules that need to 
+  // // call `runServer`. If server is already running,
+  // // `runServer` will error out.
+  // after(() => {
+  //   return closeServer();
+  // });
   // `chai.request.get` is an asynchronous operation. When
   // using Mocha with async operations, we need to either
   // return an ES6 promise or else pass a `done` callback to the

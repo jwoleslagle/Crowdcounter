@@ -1,126 +1,141 @@
-  html {
-    background-color: #3f94e7;
-    font-family: 'Roboto', sans-serif;
-  }
-    
-  button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    height: 55px;
-    width: 320px;
-    margin-bottom: 50px;
-    color: white;
-    font-size: 1.3em;
-    font-weight: bold;
-    background-color: mediumseagreen;
-    border: 2px solid seagreen;
-    border-radius: 3px;
-  }
-
-  canvas {
-    width: 100%;
-  }
-
-  fieldset {
-    border: none;
-    text-align: center;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
+html {
+  background-color: #3f94e7;
+  font-family: 'Roboto', sans-serif;
+}
   
-  header {
-    text-align: center;
-  }
+button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  height: 55px;
+  width: 320px;
+  margin-bottom: 50px;
+  color: white;
+  font-size: 1.3em;
+  font-weight: bold;
+  background-color: mediumseagreen;
+  border: 2px solid seagreen;
+  border-radius: 3px;
+}
 
-  input::placeholder {
-    color: gray;
-  }
- 
-  label {
-    display: block;
-    text-align: left;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  
-  .alert-area {
-    color: darkred;
-    background-color: rgba(230, 0, 0, 0.1);
-  }
+canvas {
+  width: 100%;
+}
 
-  .alert-container {
-    text-align: center;
-  }
+fieldset {
+  border: none;
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+}
 
-  .delete-link {
-    color: red;
-  }
+header {
+  text-align: center;
+}
 
-  .en-logo {
-    width: 350px;
-    margin: 5px;
-  }
+input::placeholder {
+  color: gray;
+}
 
-  .event-details-list {
-    list-style-type: none;
-    padding: 0;
-  }
+label {
+  display: block;
+  text-align: left;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
-  .event-img-container {
-    width: 100%;
-  }
+.alert-area {
+  color: royalblue;
+  background-color: rgba(65, 105, 225, 0.1);
+}
 
-  .events-list {
-    list-style-type: none;
-    padding: 0;
-  }
+.alert-container {
+  text-align: center;
+}
 
-  .form-area {
-    display: flex;
-    justify-content: center;
-  }
+.delete-link {
+  color: red;
+}
 
-  .input-field {
-    width: 286px;
-    padding: 15px;
-    border: 2px solid lightgray;
-    border-radius: 3px;
-    background-color: ghostwhite;
-    color: gray;
-  }
+.en-logo {
+  width: 350px;
+  margin: 5px;
+}
 
-  .main-container {
-    background-color: white;
-    text-align: center;
-    width: 400px;
-    border: 2px royalblue solid;
-  }
+.event-details-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .main-container h1 {
-    text-align: center;
-    font-size: 2em;
-  }
-  
-  .main-bottom-notice {
-    color: white;
-    font-weight: bold;
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .main-bottom-notice a {
-    color: white;
-    font-weight: bold;
-  }
+.event-img-container {
+  width: 100%;
+}
 
-  .past-event-img {
-    width: 100%;
-  }
+.events-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .submit-button:hover {
-    background-color: seagreen;
-  }
-  
+.form-area {
+  display: flex;
+  justify-content: center;
+}
+
+.input-field {
+  width: 286px;
+  padding: 15px;
+  border: 2px solid lightgray;
+  border-radius: 3px;
+  background-color: ghostwhite;
+  color: gray;
+}
+
+.index-notice {
+  font-size: 1.3em;
+  padding-bottom: 10px;
+}
+
+.left-align-body {
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.left-align-body li{
+  padding-bottom: 1.1em;
+}
+
+
+.main-container {
+  background-color: white;
+  text-align: center;
+  width: 400px;
+  border: 2px royalblue solid;
+}
+
+.main-container h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+.main-bottom-notice {
+  color: white;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.main-bottom-notice a {
+  color: white;
+  font-weight: bold;
+}
+
+.past-event-img {
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: seagreen;
+}

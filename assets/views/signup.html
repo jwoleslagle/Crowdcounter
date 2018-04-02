@@ -28,14 +28,16 @@
           </div>
           <form>
             <fieldset>
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" placeholder="foo@bar.com" name="email" class="input-field js-uname-entry" />
-              <label for="password">Password</label>
-              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" />
-              <label for="firstName" class="form-label">First Name</label>
-              <input type="text" id="firstName" placeholder="Jonathan" name="firstName" class="input-field js-fname-entry" />
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" placeholder="Doeregard" name="lastName" class="input-field js-lname-entry" />
+              <label for="username" class="form-label">Enter a username:</label>
+              <input type="text" id="username" placeholder="Must be unique." name="email" class="input-field js-uname-entry" required />
+              <label for="password">Enter a password</label>
+              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" required />
+              <label for="password">Retype the same password:</label>
+              <input type="password" id="password" placeholder="You know the drill..." name="password" class="input-field js-pwordB-entry" autocomplete="off" required />
+              <label for="firstName" class="form-label">What's your first name?</label>
+              <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" class="input-field js-fname-entry" />
+              <label for="lastName">How's about an email address?</label>
+              <input type="email" id="lastName" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" class="input-field js-email-entry" />
             </fieldset>
             <button class="submit-button js-signup-button" type="button">Sign up</button>
           </form>

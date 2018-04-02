@@ -15,27 +15,28 @@ const expect = chai.expect;
 // see: https://github.com/chaijs/chai-http
 chai.use(chaiHttp);
 
+before(function () {
+  return runServer();
+});
+
+after(function () {
+  return closeServer();
+});
+
 describe('Auth endpoints', function () {
   const username = 'exampleUser';
   const password = 'examplePass';
   const firstName = 'Example';
-  const lastName = 'User';
-
-  before(function () {
-    return runServer();
-  });
-
-  after(function () {
-    return closeServer();
-  });
+  const email = 'user@user.com';
 
   beforeEach(function() {
+    this.timeout(5000);
     return User.hashPassword(password).then(password =>
       User.create({
         username,
         password,
         firstName,
-        lastName
+        email
       })
     );
   });
@@ -56,7 +57,6 @@ describe('Auth endpoints', function () {
           if (err instanceof chai.AssertionError) {
             throw err;
           }
-
           const res = err.response;
           expect(res).to.have.status(400);
         });
@@ -111,7 +111,7 @@ describe('Auth endpoints', function () {
           expect(payload.user).to.deep.equal({
             username,
             firstName,
-            lastName
+            email
           });
         });
     });
@@ -139,7 +139,7 @@ describe('Auth endpoints', function () {
         {
           username,
           firstName,
-          lastName
+          email
         },
         'wrongSecret',
         {
@@ -170,7 +170,7 @@ describe('Auth endpoints', function () {
           user: {
             username,
             firstName,
-            lastName
+            email
           },
           exp: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
         },
@@ -203,7 +203,7 @@ describe('Auth endpoints', function () {
           user: {
             username,
             firstName,
-            lastName
+            email
           }
         },
         JWT_SECRET,
@@ -230,7 +230,7 @@ describe('Auth endpoints', function () {
           expect(payload.user).to.deep.equal({
             username,
             firstName,
-            lastName
+            email
           });
           expect(payload.exp).to.be.at.least(decoded.exp);
         });
