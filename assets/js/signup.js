@@ -9,9 +9,9 @@ function alertUser(msg) {
 
 //Clears most important fields on a rejected attempt.
 function clearInputs() {
-	$('.js-uname-entry').val() = '';
-	$('.js-pword-entry').val() = '';
-	$('.js-pwordB-entry').val() = '';
+	$('.js-uname-entry').val('');
+	$('.js-pword-entry').val('');
+	$('.js-pwordB-entry').val('');
 }
 
 //Watches signup form click, intercepts default post behavior, performs light validation, and sends data to create the user.
