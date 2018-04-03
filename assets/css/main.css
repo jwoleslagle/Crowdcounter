@@ -2,7 +2,7 @@ html {
   background-color: #3f94e7;
   font-family: 'Roboto', sans-serif;
 }
-  
+
 button {
   display: block;
   margin-left: auto;
@@ -16,6 +16,13 @@ button {
   background-color: mediumseagreen;
   border: 2px solid seagreen;
   border-radius: 8px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+}
+
+button:hover {
+  background-color: seagreen;
 }
 
 canvas {
@@ -44,12 +51,12 @@ label {
   padding-bottom: 15px;
 }
 
-li {
+.events-list li {
   margin: 3px 0px; 
   border-bottom: 1px solid #CCC;
 }
 
-li:last-child {
+.events-list li:last-child {
   margin: 0px 0px; 
   border-bottom: 0px;
 }
@@ -62,7 +69,6 @@ li:last-child {
 
 .alert-container {
   text-align: center;
-  visibility: hidden;
 }
 
 .btn {
@@ -73,6 +79,10 @@ li:last-child {
   border-radius: 8px;
   font-size: 20px;
   font-weight: bold;
+}
+
+a:hover, a:visited, a:link, a:active .button-text{
+  text-decoration: none;
 }
 
 .button-red {
@@ -120,6 +130,10 @@ li:last-child {
   border-radius: 3px;
   background-color: ghostwhite;
   color: gray;
+}
+
+.index-buttons {
+  text-align: center;
 }
 
 .index-notice {

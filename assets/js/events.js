@@ -80,7 +80,7 @@ function watchUploadSubmit() {
             .prop("disabled", true)
             .html(`<i class="fa fa-refresh fa-spin"></i> Analyzing...`);  
         let formData = new FormData;
-        //Add 
+        //Add form variables to form data with correct keys
         formData.append('eventName', $('#eventName').val());
         formData.append('eventDate', $('#eventDate').val());
         // Attach file

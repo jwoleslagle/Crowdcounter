@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta description="Login page for Crowdcounter app">
-    <title>Crowdcounter - Login Page</title>
+    <meta description="Welcome page for Crowdcounter app">
+    <title>Crowdcounter - Welcome</title>
     <!--Stylesheets and Fonts-->
       <link href="css/main.css" rel="stylesheet" type="text/css" />
       <!-- Linking Google Fonts -->
@@ -30,13 +30,18 @@
             <p>It has some limitations...</p>
             <ul>
                 <li>Images must be stored to be analyzed. Storage is cheap, but not free, so <strong>sign-in is required</strong>.</li>
-                <li>Ideally, the crowd in the picture should be <strong>facing the camera with good, flat light</strong> (think of your 3rd grade class picture).</li>
-                <li>Even then, it might not work very well! With Rekognition I'm seeing about 30-70% of faces recognized - your mileage may vary. I hope to make this a platform to try out different visual recognition solutions.</li>
+                <li>Ideally, the crowd in the picture should be <strong>mostly facing the camera squarely with good, flat light</strong> (think of your 3rd grade class picture).</li>
+                <li>Even then, it might not work very well! With Rekognition I'm seeing about 30-90% of faces recognized - your mileage may vary. I hope to make this a platform to try out different ways of scaling the image or even using different visual recognition solutions.</li>
                 <li>At present, Rekognition can only spot a <strong>maximum of 100 people per image</strong>. </li>
                 <li>I have a wishlist a mile long for this project, but the primary goal was to learn the basics of Node.js, Express, AWS S3 and Rekognition, and MongoDb. As such, if you spot any issues, feedback (via the <a href="https://github.com/jwoleslagle/Crowdcounter" alt="GitHub page for Crowdcounter">GitHub page</a>) is always appreciated.</li>
             </ul>
           </div>
-          <div class="index-notice">Ready to begin? <a href="/signup">Sign up</a> or <a href="/login">log in</a>!</div>
+          <div class="index-notice">Ready to begin?</div>
+          <div class="index-buttons">
+            <a href="/signup" alt="signup page link"><button><span class="button-text">Sign Up</span></button></a>
+            <br />or<br /> 
+            <a href="/login" alt="login page link"><button><span class="button-text">Log In</span></button></a>
+          </div>
         </div>
       </section>
     </main>

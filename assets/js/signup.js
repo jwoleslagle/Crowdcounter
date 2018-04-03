@@ -17,7 +17,7 @@ function clearInputs() {
 //Watches signup form click, intercepts default post behavior, performs light validation, and sends data to create the user.
 function handleSignupClick() {
 	//TODO: Experiment with Google reCaptcha on this form
-	$('.js-signup-button').click(function(e) {
+	$('#signupForm').submit((e) => {
 		e.preventDefault();
 		const uname = $('.js-uname-entry').val();
 		const pword = $('.js-pword-entry').val();
@@ -29,18 +29,20 @@ function handleSignupClick() {
 		if (uname != '' && pword != '') {
 			//Make sure passwords match.
 			if (pword === pwordB) {
-				const signupParams = {
-					username: uname,
-					password: pword,
-					firstName: fname,
-					email: email
-				};
+				let formData = new FormData;
+				//Add form variables to form data with correct keys
+				formData.append('username', uname);
+				formData.append('password', pword);
+				formData.append('firstName', fname);
+				formData.append('email', email);
 				$.ajax({
 					contentType: 'application/json',
-					data: JSON.stringify(signupParams),
-					dataType: 'json',
-					success: function(data){
-						if (data.username) {
+					//contentType and processData must be set to false when using FormData
+					contentType: false,
+					processData: false,
+					data: formData,
+					success: function(result){
+						if (result.username) {
 							window.location.replace("/login?=welcome");
 						} else {
 							clearInputs();
@@ -49,7 +51,8 @@ function handleSignupClick() {
 						}
 					},
 					error: function(err){
-						const alertError = err.message;
+						clearInputs();
+						const alertError = err.responseJSON.message;
 						alertUser(alertError);
 					},
 					type: 'POST',
@@ -68,7 +71,10 @@ function handleSignupClick() {
 
 //Document ready callback function - powers the page.
 function renderSignupPage() {
-	handleSignupClick();
+	//Sent to bottom of stack, otherwise form post is not intercepted.
+	setTimeout(() => { 
+		handleSignupClick();
+    }, 0);
 }
 
 $(renderSignupPage);
