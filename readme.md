@@ -13,15 +13,14 @@ Attendance is tracked carefully for ticketed events, but for events attended by 
 
 Event list:
 
-![event list](/assets/images/screenshots/Crowdcounter_screencap1.JPG){:height="50%" width="50%"}
+![event list](/assets/images/screenshots/Crowdcounter_screencap1.JPG?v=4&s=200)
 
 Event details:
 
-![event details page](/assets/images/screenshots/Crowdcounter_screencap2.JPG){:height="50%" width="50%"}
-
+![event details page](/assets/images/screenshots/Crowdcounter_screencap2.JPG?v=4&s=200)
 Another event's details:
 
-![another event details page](/assets/images/screenshots/Crowdcounter_screencap3.JPG){:height="50%" width="50%"}
+![another event details page](/assets/images/screenshots/Crowdcounter_screencap3.JPG?v=4&s=200)
 
 ## Built With
 
