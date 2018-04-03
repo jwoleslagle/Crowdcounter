@@ -28,14 +28,15 @@
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
-          <h3>Delete this event?</h3>
+          <h2>Delete this event?</h2>
           <div class="eventHeader"></div>
             <form id="deleteForm" action="api/events/remove" encType="multipart/form-data" method="post">
               <input type="hidden" name="deleteId" id="deleteId" />
               <input type="hidden" name="deleteKey" id="deleteKey" />
-              <input type="submit" value="Delete it (for sure - no takebacks!)" />
+              <button class="button-red" type="submit">Delete this event</button>
             </form>
             <br />
+            <div class="links"><a href="/events">Return to events list</a></div>
         </div>
       </section>
     </main>

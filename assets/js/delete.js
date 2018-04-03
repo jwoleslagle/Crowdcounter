@@ -1,13 +1,15 @@
 'use strict';
 
+//Creates html with requisite variables for the top of the event details page.
 function renderEventHeader(eventDetails) {
     let htmlResult= `<ul class="events-list">
         <li><h4 class="past-event-header">${eventDetails.eventName}</h4>
         <img class="past-event-img" src="${eventDetails.imgS3Location}" />
-        <p class="past-event-date">${moment(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
+        <p class="past-event-date">${moment.utc(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
     $('div.eventHeader').html(htmlResult);
 }
 
+//On page load, this function polls the events endpoint for any database documents previously created by the logged in user.
 function getEventDetails(eventId) {
     $.ajax({
         contentType: 'application/json',
@@ -32,21 +34,26 @@ function getEventDetails(eventId) {
     });
 }
 
+//Gets event ID from the query string
 function getEventIDFromQstring() {
     const rawQuerystring = location.search;
     return decodeURI(rawQuerystring.slice(6));
 }
 
+//Sets a hidden variable on the form with the event ID.
+//TODO: Refactor to remove this method - obsolete with use of AJAX instead of default form POST method.
 function setDeleteID(eid) {
     $('input[name="deleteId"]').val(eid);
 }
 
+//Sets a hidden variable on the form with the S3 object key for the image.
+//TODO: Refactor to remove this method - obsolete with use of AJAX instead of default form POST method.
 function setDeleteKey(key) {
     $('input[name="deleteKey"]').val(key);
 }
 
+//Because we're using JWT Authentication, we must intercept the form post default action and insert the JWT token in the header. Since we're circumventing the form post method, we also have to pass the form values into the AJAX data field and set contentType and processData to false.
 function watchDeleteSubmit() {
-    //Because we're using JWT Authentication, we must intercept the form post default action and insert the JWT token in the header. Since we're circumventing the form post method, we also have to pass the form values into the AJAX data field and set contentType and processData to false.
     $('#deleteForm').submit(function (e) {
         e.preventDefault(); //prevent the default action
         let formData = new FormData;
@@ -80,7 +87,7 @@ function watchDeleteSubmit() {
     });
 }
 
-//callback function to render page
+//Callback function to render page
 function startPage() {
     const deleteId = getEventIDFromQstring();
     getEventDetails(deleteId);
@@ -91,4 +98,5 @@ function startPage() {
     }, 0);
 }
 
+//This function call renders the javascript portion of the page.
 $(startPage());

@@ -9,6 +9,8 @@
       <link href="css/main.css" rel="stylesheet" type="text/css" />
       <!-- Linking Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <!-- Add icon library -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Scripts-->
       <!-- Include AW3 SDK -->
       <script src="https://sdk.amazonaws.com/js/aws-sdk-2.211.0.min.js"></script>
@@ -33,15 +35,17 @@
           </div>
           <h3>Create a New Event</h3>
           <form id="uploadForm" class="upload-form" action="/api/events" encType="multipart/form-data" method="POST">
-              <label for="eventName">Enter event name:
-              <input type="text" id="eventName" name="eventName" required /></label>
-              <label for="eventDate">Enter event date:
-              <input type="date" id="eventDate" name="eventDate" required /></label>
+              <div class="text-inputs">
+                <label for="eventName">Enter event name:
+                <input type="text" id="eventName" name="eventName" required /></label>
+                <label for="eventDate">Enter event date:
+                <input type="date" id="eventDate" name="eventDate" required /></label>
+              </div>
               <div class="upload-btn-wrapper">
                 <button class="btn">Upload a Crowd Image</button>
                 <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg" required />
               </div>
-              <button type="submit">Create the Event</button>
+              <button class="upload-button" id="uploadButton" type="submit">Create the Event</button>
           </form>
           <br />
           <hr />

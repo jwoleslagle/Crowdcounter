@@ -36,11 +36,13 @@ AWS.config.update({
     })
   });
 
+
+//JWT, not local, is needed for api and page calls
 passport.use(jwtStrategy);
 
-const jwtAuth = passport.authenticate('jwt', { session: false, failureRedirect: '/login' });
+const jwtAuth = passport.authenticate('jwt', { session: false, failureRedirect: '/login?=unauth' });
 
-// Get to return all events for user.
+// Get endpoint - should return all events previously created by the user.
 router.get('/', jwtAuth, (req, res) => {
     const query = { username: req.user.username };
     //fields to return from query are called projections, : 1 or : true to include, _id is always returned.
@@ -52,7 +54,7 @@ router.get('/', jwtAuth, (req, res) => {
     });
 });
 
-// Get to return all fields from single event document.
+// Get to return all database fields from a single event document.
 router.get('/event/:id', jwtAuth, (req, res) => {
     const query = { _id: req.params.id };
     //fields to return from query are called projections, : 1 or : true to include, _id is always returned.
@@ -73,7 +75,7 @@ router.post('/', jwtAuth, (req, res) => {
     const keyPath = 'user/' + user + '/' + file.name;
     const eventID = { _id: '' };
 
-    //Uploads original image to S3 for use in face detection...
+    //First, we Upload original image to S3 for use in face detection...
     console.log('Original image upload started.');
     const uploadParams = {  Bucket: bucketName, 
                             Key: keyPath, 
@@ -96,7 +98,7 @@ router.post('/', jwtAuth, (req, res) => {
             console.log('AWS Rekognition detectFaces started.');
         });
         
-        //Then uses runRekognition to perform facial recognition on image...
+        //Then we use  AWS Rekognition to perform facial recognition on image...
         let rekognition = new AWS.Rekognition();
         const detectParams = {
             Image: {
@@ -115,8 +117,7 @@ router.post('/', jwtAuth, (req, res) => {
                 console.log('AWS Rekognition detectFaces completed in ' + (faceDetect_t1 - faceDetect_t0) + ' ms.');
                 console.log('Summarization of facial recognition data started.');
             }
-
-            //Then extracts interesting data from the raw facial recognition data to use as img2 metadata... 
+             //Then we extract interesting data from the raw facial recognition data to use as img2 metadata... 
             let summary = { crowdCount: faceData.FaceDetails.length };
 
             //boxesOnly is used on the client side to draw face boxes on the image.
@@ -130,9 +131,8 @@ router.post('/', jwtAuth, (req, res) => {
                 crowdCount: summary.crowdCount
             })
             .then(() => {
-                //loads event details page with event ID
-                const target = `/details?evnt=${encodeURI(eventID._id)}`;
-                res.redirect(target);
+                //Returns resource created OK with proper URL for event details page. The AJAX success block redirects the user to this URL.
+                res.status(201).json({redirect: `/details?evnt=${encodeURI(eventID._id)}`});
             })
             .catch(err => {
                 console.log(err);
@@ -145,7 +145,8 @@ router.post('/', jwtAuth, (req, res) => {
     });
 });
 
-//This is actually a DELETE method but was prevented as such by browser - TODO: Research / implement 'method override"
+//Removes the S3 image and database document for the event ID. This is actually a DELETE method but was prevented as such by browser
+//TODO: Research / implement 'method override"
 router.post('/remove', jwtAuth, (req, res) => {
     const delKey = req.body.deleteKey;
     const delId = req.body.deleteId;

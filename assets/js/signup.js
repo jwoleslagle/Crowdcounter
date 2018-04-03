@@ -1,21 +1,22 @@
 'use strict';
 
+//Displays warning and informational messages to the user.
 function alertUser(msg) {
 	$('div.alert-area').html(msg);
 	$('div.alert-container').fadeIn("fast");
 	setTimeout(() => { $('div.alert-container').fadeOut("slow"); }, 4000);
 }
 
+//Clears most important fields on a rejected attempt.
 function clearInputs() {
 	$('.js-uname-entry').val() = '';
 	$('.js-pword-entry').val() = '';
 	$('.js-pwordB-entry').val() = '';
 }
 
+//Watches signup form click, intercepts default post behavior, performs light validation, and sends data to create the user.
 function handleSignupClick() {
-	//reminder - send recaptcha token to https://www.google.com/recaptcha/api/siteverify
-
-	console.log('handleSignupClick ran.');
+	//TODO: Experiment with Google reCaptcha on this form
 	$('.js-signup-button').click(function(e) {
 		e.preventDefault();
 		const uname = $('.js-uname-entry').val();
@@ -70,5 +71,4 @@ function renderSignupPage() {
 	handleSignupClick();
 }
 
-console.log('App started. Login page loaded.');
 $(renderSignupPage);

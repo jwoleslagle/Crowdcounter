@@ -1,12 +1,13 @@
 'use strict';
 
+//Renders the top part of the event details area in HTML from variables provided by the AJAX call.
 function renderEventHeader(eventDetails) {
     let htmlResult= `<ul class="events-list">
         <li><h4 class="past-event-header">${eventDetails.eventName}</h4>
         <div class="event-img-container">
             <canvas id="imgCanvas"></canvas>
         </div>
-        <p class="past-event-date">${moment(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
+        <p class="past-event-date">${moment.utc(eventDetails.eventDate).format('dddd, MMMM Do, YYYY')}</p></li></ul>`;
     $('div.eventHeader').html(htmlResult);
     if (eventDetails.faceBoxes[0] && eventDetails.crowdCount > 0) {
         renderEventBody(eventDetails);
@@ -19,6 +20,7 @@ function renderEventHeader(eventDetails) {
     }
 }
 
+//Renders the bottom part of the event details area in HTML from variables provided by the AJAX call.
 function renderEventBody(eventData) {
     let htmlResult= `<ul class="event-details-list">
         <li>Crowd Count: ${eventData.crowdCount}</li>
@@ -26,17 +28,20 @@ function renderEventBody(eventData) {
     $('div.eventBody').html(htmlResult);
 }
 
+//Renders the links area with a variable provided by the query string
 function renderLinks(eventID) {
-    let htmlResult= `<div class="links"><a href="/events">Return to events list</a> | <a class="delete-link" href="/delete?evnt=${encodeURI(eventID)}">Delete this event</a>`;
+    let htmlResult= `<div class="links"><a href="/events">Return to events list</a> | <a class="delete-link" href="/delete?evnt=${encodeURI(eventID)}">Delete this event</a></div>`;
     return htmlResult;
 }
 
+//Grabs the event ID from the query string in the page's URL location
 function getEventIdFromQstring() {
     const rawQuerystring = location.search;
     const key = decodeURI(rawQuerystring.slice(6));
     return key;
 }
 
+//AJAX call to get specifics of the event
 function getEventDetails(eventId) {
     $.ajax({
         contentType: 'application/json',
@@ -60,6 +65,7 @@ function getEventDetails(eventId) {
     });
 }
 
+//Uses HTML canvas element to draw in face bounding boxes on a false 'layer' above the image.
 function drawFaceBoxes(eventData) {
     console.log('drawFaceBoxes ran.');
     var canvas = document.getElementById('imgCanvas');
@@ -68,6 +74,7 @@ function drawFaceBoxes(eventData) {
     image.src = eventData.imgS3Location;
     image.onload = drawBoxes;
 
+    //Called when the image is actually loaded, otherwise a race condition causes width / height calls return 'undefined.' 
     function drawBoxes() {
         let imgWidth = this.naturalWidth;
         let imgHeight = this.naturalHeight;
@@ -95,5 +102,5 @@ function startPage() {
     }, 0);
 }
 
-console.log('Details page loaded.');
+//Document close to ready calls the functions that power the page.
 $(startPage());
