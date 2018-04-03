@@ -13,14 +13,15 @@ Attendance is tracked carefully for ticketed events, but for events attended by 
 
 Event list:
 
-![event list](/assets/images/screenshots/Crowdcounter_screencap1.JPG?s=100)
+![event list](/assets/images/screenshots/Crowdcounter_screencap1.JPG)
 
 Event details:
 
-![event details page](/assets/images/screenshots/Crowdcounter_screencap2.JPG?s=100)
+![event details page](/assets/images/screenshots/Crowdcounter_screencap2.JPG)
+
 Another event's details:
 
-![another event details page](/assets/images/screenshots/Crowdcounter_screencap3.JPG?s=100)
+![another event details page](/assets/images/screenshots/Crowdcounter_screencap3.JPG)
 
 ## Built With
 
