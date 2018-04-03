@@ -4,47 +4,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta description="Welcome page for Crowdcounter app">
+    <!-- Needed for favicon -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Crowdcounter - Welcome</title>
     <!--Stylesheets and Fonts-->
-      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <link href="css/main.css" rel="stylesheet" type="text/css">
       <!-- Linking Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <!-- Madness apparently required for a simple favicon -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <!--Scripts-->
       <!-- Include JQuery -->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
       <script src="js/login.js"></script>
   </head>
-  <body>
-    
-    <header role="banner">
-      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
-    </header>
-
+  
+<body>
+  <header role="banner">
+    <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo">
+  </header>
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
-          <div class="left-align-body">
-            <h1>Welcome!</h1>
-            <p>Crowdcounter is a simple project which attempts to count the number of people in a snapshot of a crowd using Amazon's Rekognition facial recognition service.</p>
-            <p>It has some limitations...</p>
-            <ul>
-                <li>Images must be stored to be analyzed. Storage is cheap, but not free, so <strong>sign-in is required</strong>.</li>
-                <li>Ideally, the crowd in the picture should be <strong>mostly facing the camera squarely with good, flat light</strong> (think of your 3rd grade class picture).</li>
-                <li>Even then, it might not work very well! With Rekognition I'm seeing about 30-90% of faces recognized - your mileage may vary. I hope to make this a platform to try out different ways of scaling the image or even using different visual recognition solutions.</li>
-                <li>At present, Rekognition can only spot a <strong>maximum of 100 people per image</strong>. </li>
-                <li>I have a wishlist a mile long for this project, but the primary goal was to learn the basics of Node.js, Express, AWS S3 and Rekognition, and MongoDb. As such, if you spot any issues, feedback (via the <a href="https://github.com/jwoleslagle/Crowdcounter" alt="GitHub page for Crowdcounter">GitHub page</a>) is always appreciated.</li>
-            </ul>
-          </div>
-          <div class="index-notice">Ready to begin?</div>
-          <div class="index-buttons">
-            <a href="/signup" alt="signup page link"><button><span class="button-text">Sign Up</span></button></a>
-            <br />or<br /> 
-            <a href="/login" alt="login page link"><button><span class="button-text">Log In</span></button></a>
-          </div>
+        <div class="left-align-body">
+          <h1>Welcome!</h1>
+          <p>Crowdcounter is a simple project which attempts to count the number of people in a snapshot of a crowd using Amazon's Rekognition facial recognition service.</p>
+          <p>It has some limitations...</p>
+          <ul>
+              <li>Images must be stored to be analyzed. Storage is cheap, but not free, so <strong>sign-in is required</strong>.</li>
+              <li>Ideally, the crowd in the picture should be <strong>mostly facing the camera squarely with good, flat light</strong> (think of your 3rd grade class picture).</li>
+              <li>Even then, it might not work very well! With Rekognition I'm seeing about 30-90% of faces recognized - your mileage may vary. I hope to make this a platform to try out different ways of scaling the image or even using different visual recognition solutions.</li>
+              <li>At present, Rekognition can only spot a <strong>maximum of 100 people per image</strong>. </li>
+              <li>I have a wishlist a mile long for this project, but the primary goal was to learn the basics of Node.js, Express, AWS S3 and Rekognition, and MongoDb. As such, if you spot any issues, feedback (via the <a href="https://github.com/jwoleslagle/Crowdcounter" alt="GitHub page for Crowdcounter">GitHub page</a>) is always appreciated.</li>
+          </ul>
+        </div>
+        <div class="index-notice">Ready to begin?</div>
+        <div class="index-buttons">
+          <a href="/signup" alt="signup page link"><button>Sign Up</button></a>
+          <br>or<br> 
+          <a href="/login" alt="login page link"><button>Log In</button></a>
+        </div>
         </div>
       </section>
     </main>
-
   </body>
 </html>

@@ -4,11 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta description="Delete an Event - Crowdcounter">
+    <!-- Needed for favicon -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Crowdcounter - Delete Event</title>
     <!--Stylesheets and Fonts-->
-      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <link href="css/main.css" rel="stylesheet" type="text/css">
       <!-- Linking Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <!-- Needed for favicon -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <!--Scripts-->
       <!-- Include AW3 SDK -->
       <script src="https://sdk.amazonaws.com/js/aws-sdk-2.211.0.min.js"></script>
@@ -18,24 +28,23 @@
       <script src="js/delete.js"></script>
       <!-- Include Moment.js for date picker and event data -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js"></script>
-  </head>
-  <body>
-    
-    <header role="banner">
-      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
-    </header>
 
+</head>
+  <body>
+    <header role="banner">
+      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo">
+    </header>
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
           <h2>Delete this event?</h2>
           <div class="eventHeader"></div>
-            <form id="deleteForm" action="api/events/remove" encType="multipart/form-data" method="post">
-              <input type="hidden" name="deleteId" id="deleteId" />
-              <input type="hidden" name="deleteKey" id="deleteKey" />
+            <form id="deleteForm" action="api/events/remove" enctype="multipart/form-data" method="post">
+              <input type="hidden" name="deleteId" id="deleteId">
+              <input type="hidden" name="deleteKey" id="deleteKey">
               <button class="button-red" type="submit">Delete this event</button>
             </form>
-            <br />
+            <br>
             <div class="links"><a href="/events">Return to events list</a></div>
         </div>
       </section>

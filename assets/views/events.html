@@ -4,13 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta description="Events page for Crowdcounter app">
+    <!-- Required for favicon -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Crowdcounter - Events Page</title>
     <!--Stylesheets and Fonts-->
-      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <link href="css/main.css" rel="stylesheet" type="text/css">
       <!-- Linking Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <!-- Add icon library -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- Needed for favicon -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <!--Scripts-->
       <!-- Include AW3 SDK -->
       <script src="https://sdk.amazonaws.com/js/aws-sdk-2.211.0.min.js"></script>
@@ -20,13 +30,11 @@
       <script src="js/events.js"></script>
       <!-- Include Moment.js for date picker and event data -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.js"></script>
-  </head>
+</head>
   <body>
-    
     <header role="banner">
-      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
+      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo">
     </header>
-
     <main role="main">
       <section class="form-area" role="region">
         <div class="main-container">
@@ -34,21 +42,21 @@
               <div class="alert-area js-alert-area"></div>
           </div>
           <h3>Create a New Event</h3>
-          <form id="uploadForm" class="upload-form" action="/api/events" encType="multipart/form-data" method="POST">
+          <form id="uploadForm" class="upload-form" action="/api/events" enctype="multipart/form-data" method="POST">
               <div class="text-inputs">
                 <label for="eventName">Enter event name:
-                <input type="text" id="eventName" name="eventName" required /></label>
+                <input type="text" id="eventName" name="eventName" required></label>
                 <label for="eventDate">Enter event date:
-                <input type="date" id="eventDate" name="eventDate" required /></label>
+                <input type="date" id="eventDate" name="eventDate" required></label>
               </div>
               <div class="upload-btn-wrapper">
                 <button class="btn">Upload a Crowd Image</button>
-                <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg" required />
+                <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .jpeg" required>
               </div>
               <button class="upload-button" id="uploadButton" type="submit">Create the Event</button>
           </form>
-          <br />
-          <hr />
+          <br>
+          <hr>
           <h3>Past Events</h3>
             <div class="eventsList"></div>
         </div>

@@ -81,13 +81,29 @@ label {
   font-weight: bold;
 }
 
-a:hover, a:visited, a:link, a:active .button-text{
+.index-buttons a:hover {
+  text-decoration: none;
+}
+
+.index-buttons a:visited {
+  text-decoration: none;
+}
+
+.index-buttons a:link {
+  text-decoration: none;
+}
+
+.index-buttons a:active {
   text-decoration: none;
 }
 
 .button-red {
   background-color: red;
   border: 2px solid darkred;
+}
+
+.button-red:hover {
+  background-color: darkred;
 }
 
 .delete-link {

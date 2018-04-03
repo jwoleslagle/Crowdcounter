@@ -4,22 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta description="Signup page for Crowdcounter app">
+    <!-- Needed for favicon -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/images/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Crowdcounter - Signup Page</title>
     <!--Stylesheets and Fonts-->
-      <link href="css/main.css" rel="stylesheet" type="text/css" />
+      <link href="css/main.css" rel="stylesheet" type="text/css">
       <!-- Linking Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <!--Needed for favicon -->
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <!--Scripts-->
       <!-- Include JQuery -->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
       <!-- Include JS specific to page -->
     <script src="js/signup.js"></script>
       <!-- Include reCaptcha -->
-      <script src='https://www.google.com/recaptcha/api.js'></script>
-  </head>
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+
+</head>
   <body>
     <header role="banner">
-      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo" />
+      <img src="images/crowdcounter-logo.png" class="en-logo" alt="Crowdcounter logo">
     </header>
     <main role="main">
       <section class="form-area" role="region">
@@ -31,15 +42,15 @@
           <form id="signupForm">
             <fieldset>
               <label for="username" class="form-label">Enter a username:</label>
-              <input type="text" id="username" placeholder="Must be unique." name="email" class="input-field js-uname-entry" required />
+              <input type="text" id="username" placeholder="Must be unique." name="email" class="input-field js-uname-entry" required>
               <label for="password">Enter a password</label>
-              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" required />
+              <input type="password" id="password" placeholder="1234passw0rd" name="password" class="input-field js-pword-entry" autocomplete="off" required>
               <label for="password">Retype the same password:</label>
-              <input type="password" id="passwordB" placeholder="You know the drill..." name="passwordB" class="input-field js-pwordB-entry" autocomplete="off" required />
+              <input type="password" id="passwordB" placeholder="You know the drill..." name="passwordB" class="input-field js-pwordB-entry" autocomplete="off" required>
               <label for="firstName" class="form-label">What's your first name?</label>
-              <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" autocomplete="given-name" class="input-field js-fname-entry" />
+              <input type="text" id="firstName" placeholder="Not required, but makes this site 2% friendlier." name="firstName" autocomplete="given-name" class="input-field js-fname-entry">
               <label for="email">How's about an email address?</label>
-              <input type="email" id="email" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" autocomplete='email' class="input-field js-email-entry" />
+              <input type="email" id="email" placeholder="Again, not mandatory... no need to fake it." name="emailAddress" autocomplete="email" class="input-field js-email-entry">
             </fieldset>
             <!-- <div class="g-recaptcha" data-sitekey="6LdynU8UAAAAAJN-iH7fuXPM2iG3zNGIHBvwgs56"></div> -->
             <button class="user-submit-button js-signup-button" type="submit">Sign up</button>
